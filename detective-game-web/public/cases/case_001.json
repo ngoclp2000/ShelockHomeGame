@@ -1,0 +1,160 @@
+{
+  "caseId": "case_001",
+  "title": "Căn phòng khóa kín",
+  "difficulty": "easy",
+  "introText": "Doanh nhân giàu có Trần Văn Hùng được tìm thấy đã chết trong phòng làm việc - căn phòng bị khóa từ bên trong. Vợ ông ta, Trần Thị Lan, và quản gia lâu năm, Nguyễn Văn Đức, là hai nghi phạm chính. Hãy khám phá hiện trường và tìm ra sự thật!",
+  "intro": "Sáng sớm hôm nay, khi người quản gia Nguyễn Văn Đức đến mở cửa phòng làm việc của ông chủ, ông đã phát hiện cảnh tượng kinh hoàng.\n\nDoanh nhân Trần Văn Hùng, 58 tuổi, người giàu nhất vùng, được tìm thấy đã chết trong phòng làm việc riêng. Căn phòng bị khóa từ bên trong - không có cách nào ai vào được trừ khi có chìa khóa.\n\nThám tử, bạn được gọi đến để điều tra vụ án này. Hai nghi phạm chính: Người vợ và quản gia. Ai là kẻ sát nhân? Làm sao họ ra khỏi phòng khóa?",
+
+  "clues": [
+    {
+      "id": "clue_bloody_knife",
+      "name": "Con dao có máu",
+      "description": "Một con dao bếp dính máu, được tìm thấy gần cơ thể nạn nhân. Không có dấu vân tay trên dao - như thể đã bị lau sạch cẩn thận. Đây có thể là hung khí.",
+      "spritePath": "Clues/knife",
+      "tags": ["vũ khí", "bằng chứng quan trọng"]
+    },
+    {
+      "id": "clue_threatening_letter",
+      "name": "Lá thư đe dọa",
+      "description": "Một lá thư đe dọa được tìm trong ngăn kéo bàn của nạn nhân: 'Nếu ông không chia tài sản, ông sẽ hối hận!' Chữ viết tay của phụ nữ. Có mùi nước hoa nhẹ còn lưu lại.",
+      "spritePath": "Clues/letter",
+      "tags": ["tài liệu", "động cơ", "bằng chứng quan trọng"]
+    },
+    {
+      "id": "clue_torn_fabric",
+      "name": "Mảnh vải rách",
+      "description": "Một mảnh vải lụa màu đỏ bị rách, kẹt ở khung cửa sổ. Vải cao cấp, có thể từ bộ đồ đắt tiền. Ai đó có thể đã cố thoát ra qua cửa sổ.",
+      "spritePath": "Clues/fabric",
+      "tags": ["vật chất", "manh mối"]
+    },
+    {
+      "id": "clue_muddy_footprint",
+      "name": "Dấu chân bùn",
+      "description": "Dấu chân bùn trên sàn gần cửa sổ. Kích cỡ nhỏ - có thể của phụ nữ hoặc người có bàn chân nhỏ. Bùn ướt, cho thấy người này vào đây gần đây.",
+      "spritePath": "Clues/footprint",
+      "tags": ["vật chất", "manh mối"]
+    },
+    {
+      "id": "clue_window_latch",
+      "name": "Chốt cửa sổ",
+      "description": "Chốt cửa sổ phòng làm việc bị hỏng từ bên trong, nhưng cửa sổ vẫn đóng. Có vết xước mới - ai đó đã cố mở chốt. Cửa sổ này là cách duy nhất vào ngoài cửa chính.",
+      "spritePath": "Clues/latch",
+      "tags": ["cơ chế", "quan trọng"]
+    }
+  ],
+
+  "suspects": [
+    {
+      "id": "suspect_wife",
+      "name": "Trần Thị Lan (Vợ)",
+      "avatarPath": "Avatars/wife",
+      "bio": "Vợ của nạn nhân, 45 tuổi. Được biết đến với tính ghen tuông và chi tiêu hoang phí. Gần đây có xung đột về tài chính với chồng.",
+      "questions": [
+        {
+          "id": "q_wife_1",
+          "text": "Bà ở đâu khi vụ án xảy ra?",
+          "answer": "Tôi ở phòng ngủ cả đêm! Tôi nghe tiếng gì đó lúc nửa đêm nhưng nghĩ đó là gió. Tôi không biết chồng tôi đã chết cho đến sáng hôm sau.",
+          "unlocks": {
+            "questions": ["q_wife_2"],
+            "clues": []
+          }
+        },
+        {
+          "id": "q_wife_2",
+          "text": "Bà có viết lá thư đe dọa này không?",
+          "answer": "*tái mặt* Đó... đó là chữ của tôi, nhưng tôi không có ý giết ai! Tôi chỉ muốn dọa ông ấy vì ông ấy định để lại tất cả tài sản cho quỹ từ thiện thay vì tôi!",
+          "unlocks": {
+            "questions": ["q_wife_3"],
+            "clues": []
+          }
+        },
+        {
+          "id": "q_wife_3",
+          "text": "Bộ váy lụa đỏ của bà đâu rồi?",
+          "answer": "*run rẩy* Tôi... tôi không biết. Tôi mặc nó hôm qua nhưng... *nhìn đi chỗ khác* Quản gia nói ông ấy đem đi giặt. Hỏi ông ta đi!",
+          "unlocks": {
+            "questions": [],
+            "clues": ["clue_torn_fabric"]
+          }
+        }
+      ]
+    },
+    {
+      "id": "suspect_butler",
+      "name": "Nguyễn Văn Đức (Quản gia)",
+      "avatarPath": "Avatars/butler",
+      "bio": "Quản gia trung thành 20 năm, 55 tuổi. Luôn bảo vệ gia đình Trần. Có chìa khóa tất cả các phòng trong nhà, bao gồm phòng làm việc.",
+      "questions": [
+        {
+          "id": "q_butler_1",
+          "text": "Ông có chìa khóa phòng làm việc không?",
+          "answer": "Có, tôi có chìa khóa dự phòng. Nhưng tôi không vào phòng đó tối qua! Khi tôi kiểm tra sáng nay, cửa khóa từ bên trong nên tôi phải dùng chìa khóa.",
+          "unlocks": {
+            "questions": ["q_butler_2"],
+            "clues": []
+          }
+        },
+        {
+          "id": "q_butler_2",
+          "text": "Ông có thấy bà chủ đêm qua không?",
+          "answer": "*ngập ngừng* Tôi... tôi thấy bà ấy đi xuống cầu thang lúc khoảng 11 giờ đêm. Bà ấy mặc váy đỏ và trông rất tức giận. Tôi giả vờ không thấy.",
+          "unlocks": {
+            "questions": ["q_butler_3"],
+            "clues": []
+          }
+        },
+        {
+          "id": "q_butler_3",
+          "text": "Ông có biết về lá thư đe dọa không?",
+          "answer": "Tôi thấy bà chủ viết thứ gì đó 2 ngày trước, bà ấy rất giận dữ. Ông chủ nói với tôi ông ấy đang thay đổi di chúc, để lại tất cả cho từ thiện. Bà chủ biết điều đó và rất điên tiết.",
+          "unlocks": {
+            "questions": [],
+            "clues": ["clue_threatening_letter"]
+          }
+        }
+      ]
+    }
+  ],
+
+  "motives": [
+    {
+      "id": "motive_money",
+      "text": "Tiền - thừa kế tài sản"
+    },
+    {
+      "id": "motive_jealousy",
+      "text": "Ghen tuông"
+    },
+    {
+      "id": "motive_revenge",
+      "text": "Trả thù"
+    },
+    {
+      "id": "motive_blackmail",
+      "text": "Tống tiền"
+    }
+  ],
+
+  "weapons": [
+    {
+      "id": "weapon_knife",
+      "text": "Con dao bếp"
+    },
+    {
+      "id": "weapon_poison",
+      "text": "Thuốc độc"
+    },
+    {
+      "id": "weapon_strangling",
+      "text": "Bóp cổ"
+    }
+  ],
+
+  "solution": {
+    "killerId": "suspect_wife",
+    "motiveId": "motive_money",
+    "weaponId": "weapon_knife",
+    "keyEvidenceId": "clue_threatening_letter",
+    "explanation": "**Kết luận:** Trần Thị Lan (vợ nạn nhân) là hung thủ.\n\n**Diễn biến vụ án:**\n1. Bà Lan biết chồng sắp thay đổi di chúc, để lại toàn bộ tài sản cho từ thiện thay vì bà.\n2. Bà viết thư đe dọa nhưng chồng không lay chuyển.\n3. Đêm xảy ra vụ án, bà mặc váy đỏ xuống phòng làm việc (quản gia chứng kiến).\n4. Sau khi giết chồng bằng dao, bà cố thoát ra cửa sổ, làm rách váy.\n5. Bà quay lại cửa chính, khóa từ bên trong để tạo hiện trường 'phòng khóa kín'.\n6. Dấu chân bùn nhỏ phù hợp với bà.\n\n**Bằng chứng quyết định:** Lá thư đe dọa viết bằng chữ của bà, với động cơ tiền bạc rõ ràng."
+  }
+}
