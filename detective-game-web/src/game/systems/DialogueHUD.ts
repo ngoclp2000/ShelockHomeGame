@@ -191,7 +191,7 @@ export class DialogueHUD {
         this.render();
       }
     });
-    this.panel.add(hitZone);
+    this.panel.addAt(hitZone, 0);
 
     // Answer Box
     const boxWidth = panelW - 80 * this.SCALE;
@@ -313,4 +313,3 @@ export class DialogueHUD {
     return container;
   }
 }
-
