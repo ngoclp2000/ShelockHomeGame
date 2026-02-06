@@ -1,0 +1,265 @@
+{
+  "caseId": "case_001",
+  "title": "Căn phòng khóa kín",
+  "introText": "Một vụ án bí ẩn xảy ra trong căn hộ của doanh nhân giàu có Trần Minh Tuấn. Nạn nhân được tìm thấy đã tử vong trong phòng làm việc - một căn phòng được khóa kín từ bên trong. Không có dấu vết đột nhập. Bạn được giao nhiệm vụ điều tra và tìm ra sự thật.",
+
+  "scenes": [
+    {
+      "sceneId": "scene_office",
+      "backgroundSpritePath": "Placeholders/bg_office",
+      "hotspots": [
+        {
+          "hotspotId": "hotspot_glass",
+          "x": 0.25,
+          "y": 0.4,
+          "clueId": "clue_broken_glass",
+          "label": "Ly thủy tinh vỡ"
+        },
+        {
+          "hotspotId": "hotspot_bottle",
+          "x": 0.7,
+          "y": 0.35,
+          "clueId": "clue_poison_bottle",
+          "label": "Lọ thuốc nhỏ"
+        },
+        {
+          "hotspotId": "hotspot_diary",
+          "x": 0.5,
+          "y": 0.55,
+          "clueId": "clue_diary",
+          "label": "Nhật ký"
+        },
+        {
+          "hotspotId": "hotspot_key",
+          "x": 0.15,
+          "y": 0.6,
+          "clueId": "clue_spare_key",
+          "label": "Chìa khóa dự phòng"
+        },
+        {
+          "hotspotId": "hotspot_photo",
+          "x": 0.85,
+          "y": 0.65,
+          "clueId": "clue_torn_photo",
+          "label": "Ảnh rách"
+        }
+      ]
+    }
+  ],
+
+  "clues": [
+    {
+      "id": "clue_broken_glass",
+      "name": "Ly thủy tinh vỡ",
+      "description": "Một chiếc ly thủy tinh đã vỡ nằm trên sàn gần bàn làm việc. Bên trong còn vết tích của một loại đồ uống màu vàng nhạt - có lẽ là trà hoặc rượu whisky. Có vết mờ đục bất thường ở đáy ly.",
+      "spritePath": "Placeholders/clue_glass",
+      "tags": ["hiện trường", "đồ uống", "quan trọng"]
+    },
+    {
+      "id": "clue_poison_bottle",
+      "name": "Lọ thuốc nhỏ",
+      "description": "Một lọ thuốc nhỏ màu nâu được giấu trong ngăn kéo bàn. Nhãn đã bị bóc đi nhưng vẫn còn vết dán. Khi mở ra có mùi đắng đặc trưng của một số loại thuốc ngủ mạnh.",
+      "spritePath": "Placeholders/clue_bottle",
+      "tags": ["thuốc độc", "ngăn kéo", "quan trọng"]
+    },
+    {
+      "id": "clue_diary",
+      "name": "Nhật ký cá nhân",
+      "description": "Cuốn nhật ký của nạn nhân. Những dòng cuối cùng viết: 'Tôi đã phát hiện ra bí mật của L.A. Cô ta đã lừa dối tôi suốt 2 năm qua. Phải chấm dứt mọi thứ...' Trang tiếp theo bị xé mất.",
+      "spritePath": "Placeholders/clue_diary",
+      "tags": ["tài liệu", "động cơ", "quan trọng"]
+    },
+    {
+      "id": "clue_spare_key",
+      "name": "Chìa khóa dự phòng",
+      "description": "Một chiếc chìa khóa dự phòng của văn phòng được tìm thấy dưới chậu cây cảnh. Có dấu vân tay mới trên đó. Điều này chứng tỏ có người khác có thể vào phòng dù cửa đã khóa.",
+      "spritePath": "Placeholders/clue_key",
+      "tags": ["chìa khóa", "vào phòng", "quan trọng"]
+    },
+    {
+      "id": "clue_torn_photo",
+      "name": "Ảnh rách",
+      "description": "Một tấm ảnh bị xé làm đôi. Trong ảnh là nạn nhân đang ôm một người phụ nữ - Lê Thị An. Phần mặt của cô ấy đã bị xé bỏ một cách cố ý. Phía sau ảnh có ghi ngày: '15/06/2024 - Kỷ niệm 2 năm'.",
+      "spritePath": "Placeholders/clue_photo",
+      "tags": ["ảnh", "mối quan hệ", "quan trọng"]
+    },
+    {
+      "id": "clue_alibi_proof",
+      "name": "Bằng chứng ngoại phạm",
+      "description": "Camera an ninh tòa nhà cho thấy Nguyễn Văn Hùng có mặt ở sảnh lúc 21:00 - thời điểm xảy ra vụ án. Tuy nhiên, có khoảng trống 15 phút từ 20:45-21:00 mà camera không ghi lại.",
+      "spritePath": "Placeholders/clue_cctv",
+      "tags": ["camera", "ngoại phạm", "thời gian"]
+    }
+  ],
+
+  "suspects": [
+    {
+      "id": "suspect_an",
+      "name": "Lê Thị An",
+      "avatarPath": "Placeholders/avatar_an",
+      "bio": "Thư ký riêng của nạn nhân, 28 tuổi. Làm việc cho ông Tuấn được 3 năm. Được biết là có mối quan hệ thân thiết với nạn nhân ngoài công việc.",
+      "questions": [
+        {
+          "id": "q_an_1",
+          "text": "Chị ở đâu vào lúc xảy ra vụ án?",
+          "answer": "Tôi... tôi đang ở nhà. Một mình. Tôi biết điều đó nghe khó tin nhưng đó là sự thật. Tôi không có ai chứng minh.",
+          "unlocks": {
+            "questions": ["q_an_2"],
+            "clues": []
+          }
+        },
+        {
+          "id": "q_an_2",
+          "text": "Chị có mối quan hệ như thế nào với nạn nhân?",
+          "answer": "*im lặng một lúc* Chúng tôi... có quan hệ tình cảm. Nhưng gần đây anh ấy đã thay đổi. Anh ấy phát hiện ra tôi đã giấu một bí mật lớn.",
+          "unlocks": {
+            "questions": ["q_an_3"],
+            "clues": []
+          }
+        },
+        {
+          "id": "q_an_3",
+          "text": "Bí mật gì? Chị có thể cho tôi biết không?",
+          "answer": "Tôi... tôi đã kết hôn. Chồng tôi là Nguyễn Văn Hùng - người làm việc cùng công ty. Anh Tuấn phát hiện ra và rất tức giận. Anh ấy đe dọa sẽ nói hết với Hùng.",
+          "unlocks": {
+            "questions": ["q_an_4"],
+            "clues": []
+          }
+        },
+        {
+          "id": "q_an_4",
+          "text": "Chị có biết về chiếc chìa khóa dự phòng không?",
+          "answer": "Chìa khóa dự phòng? *mắt mở to* Có, tôi biết nó được giấu dưới chậu cây. Anh Tuấn đã cho tôi biết... để tôi có thể vào văn phòng khi cần.",
+          "unlocks": {
+            "questions": [],
+            "clues": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "suspect_hung",
+      "name": "Nguyễn Văn Hùng",
+      "avatarPath": "Placeholders/avatar_hung",
+      "bio": "Quản lý tài chính của công ty, 35 tuổi. Là chồng của Lê Thị An nhưng ít ai biết. Có mối quan hệ căng thẳng với nạn nhân vì vấn đề tài chính công ty.",
+      "questions": [
+        {
+          "id": "q_hung_1",
+          "text": "Anh ở đâu vào lúc xảy ra vụ án?",
+          "answer": "Tôi ở sảnh công ty, chờ thang máy. Camera an ninh có ghi lại. Khoảng 21:00 tôi lên tầng và phát hiện anh Tuấn đã... đã chết rồi.",
+          "unlocks": {
+            "questions": ["q_hung_2"],
+            "clues": ["clue_alibi_proof"]
+          }
+        },
+        {
+          "id": "q_hung_2",
+          "text": "Anh có biết về mối quan hệ giữa vợ anh và nạn nhân không?",
+          "answer": "*nghiến răng* Tôi đã nghi ngờ từ lâu. Nhưng chỉ tuần trước tôi mới có bằng chứng. Anh Tuấn... anh ta đã phá hoại gia đình tôi!",
+          "unlocks": {
+            "questions": ["q_hung_3"],
+            "clues": []
+          }
+        },
+        {
+          "id": "q_hung_3",
+          "text": "Vậy anh có động cơ để giết ông Tuấn phải không?",
+          "answer": "Tôi giận anh ta, đúng! Nhưng tôi không giết người. Tôi là người phát hiện xác anh ta! Tại sao tôi lại gọi cảnh sát nếu tôi là hung thủ?",
+          "unlocks": {
+            "questions": ["q_hung_4"],
+            "clues": []
+          }
+        },
+        {
+          "id": "q_hung_4",
+          "text": "Anh có biết về lọ thuốc trong ngăn kéo không?",
+          "answer": "*im lặng* Lọ thuốc? Tôi... tôi không biết lọ thuốc nào cả. Tôi không vào văn phòng của anh ta thường xuyên. *tránh ánh mắt*",
+          "unlocks": {
+            "questions": ["q_hung_5"],
+            "clues": []
+          }
+        },
+        {
+          "id": "q_hung_5",
+          "text": "Từ 20:45 đến 21:00 anh ở đâu? Camera không ghi lại.",
+          "answer": "*toát mồ hôi* Tôi... tôi đi vệ sinh. Khu vực đó không có camera. Tôi thề là như vậy! Cô có thể hỏi bảo vệ.",
+          "unlocks": {
+            "questions": [],
+            "clues": []
+          }
+        }
+      ]
+    }
+  ],
+
+  "motives": [
+    {
+      "id": "motive_jealousy",
+      "text": "Ghen tuông vì vợ ngoại tình"
+    },
+    {
+      "id": "motive_silencing",
+      "text": "Buộc phải im lặng vì bị đe dọa"
+    },
+    {
+      "id": "motive_money",
+      "text": "Tranh chấp tài sản, tiền bạc"
+    },
+    {
+      "id": "motive_revenge",
+      "text": "Trả thù vì bị phản bội"
+    }
+  ],
+
+  "weapons": [
+    {
+      "id": "weapon_poison",
+      "text": "Thuốc độc (pha vào đồ uống)"
+    },
+    {
+      "id": "weapon_suffocation",
+      "text": "Ngạt thở"
+    },
+    {
+      "id": "weapon_blunt",
+      "text": "Vật cùn (đánh vào đầu)"
+    },
+    {
+      "id": "weapon_stabbing",
+      "text": "Dao đâm"
+    }
+  ],
+
+  "deductionOptions": {
+    "keyEvidences": [
+      {
+        "id": "evidence_key",
+        "text": "Chìa khóa dự phòng - chứng minh hung thủ biết cách vào phòng",
+        "clueId": "clue_spare_key"
+      },
+      {
+        "id": "evidence_bottle",
+        "text": "Lọ thuốc - chứng minh đầu độc có chủ ý",
+        "clueId": "clue_poison_bottle"
+      },
+      {
+        "id": "evidence_diary",
+        "text": "Nhật ký - chứng minh động cơ",
+        "clueId": "clue_diary"
+      },
+      {
+        "id": "evidence_alibi",
+        "text": "Khoảng trống 15 phút - thời gian gây án",
+        "clueId": "clue_alibi_proof"
+      }
+    ]
+  },
+
+  "solution": {
+    "killerId": "suspect_hung",
+    "motiveId": "motive_jealousy",
+    "weaponId": "weapon_poison",
+    "keyEvidenceId": "evidence_alibi",
+    "explanation": "Nguyễn Văn Hùng đã giết Trần Minh Tuấn vì ghen tuông khi phát hiện vợ mình ngoại tình với nạn nhân.\n\nAnh ta biết về chiếc chìa khóa dự phòng qua vợ (An). Lợi dụng khoảng trống 15 phút không có camera, Hùng đã lên văn phòng, dùng chìa khóa mở cửa, bỏ thuốc độc vào ly rượu của nạn nhân, rồi khóa cửa lại từ bên trong bằng cách ném chìa khóa qua khe cửa sổ.\n\nSau đó anh ta quay lại sảnh để tạo ngoại phạm, giả vờ phát hiện xác nạn nhân. Sự căng thẳng khi bị hỏi về lọ thuốc và khoảng trống 15 phút đã tố cáo anh ta."
+  }
+}
