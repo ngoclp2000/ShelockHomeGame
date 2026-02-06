@@ -9,6 +9,7 @@ export interface CaseData {
   difficulty: string;
   introText: string;
   intro?: string; // Story intro for case intro scene
+  backgroundTheme?: string;
   clues: ClueData[];
   suspects: SuspectData[];
   motives: MotiveData[];

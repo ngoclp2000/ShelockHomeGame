@@ -2,6 +2,18 @@ import Phaser from 'phaser';
 import { CaseLoader } from '../data/caseLoader';
 import { EventBus } from '../systems/EventBus';
 
+type BackgroundTheme =
+  | 'study'
+  | 'train'
+  | 'ballroom'
+  | 'hospital'
+  | 'boardroom'
+  | 'tech'
+  | 'newsroom'
+  | 'alley'
+  | 'studio'
+  | 'apartment';
+
 /**
  * PreloadScene - Load assets and generate detective character
  */
@@ -48,7 +60,6 @@ export class PreloadScene extends Phaser.Scene {
   create(): void {
     // Generate all sprites
     this.generateDetectiveSprite();
-    this.generateRoomBackground();
     this.generateClueIcon();
     this.generateNPCSprites();
     
@@ -64,6 +75,12 @@ export class PreloadScene extends Phaser.Scene {
     
     CaseLoader.setCurrentCase(caseData);
     EventBus.emit('case:loaded', { caseId: this.caseId });
+
+    const backgroundTheme = this.resolveBackgroundTheme(caseData?.backgroundTheme);
+    this.generateRoomBackground(backgroundTheme);
+    if (!this.textures.exists('room_background')) {
+      this.generateRoomBackground('study', 'room_background');
+    }
     
     // Go to case intro scene (story + tutorial)
     this.scene.start('CaseIntroScene', { caseId: this.caseId });
@@ -311,88 +328,281 @@ export class PreloadScene extends Phaser.Scene {
     ctx.restore();
   }
 
-  private generateRoomBackground(): void {
+  private resolveBackgroundTheme(theme?: string): BackgroundTheme {
+    const allowedThemes: BackgroundTheme[] = [
+      'study',
+      'train',
+      'ballroom',
+      'hospital',
+      'boardroom',
+      'tech',
+      'newsroom',
+      'alley',
+      'studio',
+      'apartment',
+    ];
+    if (theme && allowedThemes.includes(theme as BackgroundTheme)) {
+      return theme as BackgroundTheme;
+    }
+    return 'study';
+  }
+
+  private generateRoomBackground(
+    theme: BackgroundTheme,
+    textureKey: string = `room_background_${theme}`
+  ): void {
     const ASSET_SCALE = 2;
     const canvas = document.createElement('canvas');
     canvas.width = 960 * ASSET_SCALE;
     canvas.height = 640 * ASSET_SCALE;
     const ctx = canvas.getContext('2d')!;
     ctx.scale(ASSET_SCALE, ASSET_SCALE);
-    
-    // Beautiful Victorian room
-    
-    // Wood floor with planks
-    const woodColors = ['#6b5344', '#5d4a3a', '#7a6050', '#645040'];
+    if (theme === 'train') {
+      this.drawTrainCar(ctx);
+    } else if (theme === 'alley') {
+      this.drawAlley(ctx);
+    } else {
+      this.drawInteriorBase(ctx, theme);
+      this.drawThemeProps(ctx, theme);
+    }
+
+    this.textures.addImage(textureKey, canvas as any);
+  }
+
+  private drawInteriorBase(ctx: CanvasRenderingContext2D, theme: BackgroundTheme): void {
+    const palette = this.getInteriorPalette(theme);
+
+    if (theme === 'hospital' || theme === 'tech' || theme === 'studio') {
+      this.drawTileFloor(ctx, palette.floorTile, palette.floorTileLine);
+    } else {
+      this.drawWoodFloor(ctx, palette.floorPlanks);
+    }
+
+    // Carpet
+    const carpetGrad = ctx.createRadialGradient(480, 320, 0, 480, 320, 250);
+    carpetGrad.addColorStop(0, palette.carpetCenter);
+    carpetGrad.addColorStop(0.7, palette.carpetMid);
+    carpetGrad.addColorStop(1, palette.carpetOuter);
+    ctx.fillStyle = carpetGrad;
+    ctx.beginPath();
+    ctx.roundRect(180, 140, 600, 360, 20);
+    ctx.fill();
+
+    ctx.strokeStyle = palette.carpetBorder;
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.roundRect(195, 155, 570, 330, 15);
+    ctx.stroke();
+
+    ctx.strokeStyle = palette.carpetInnerBorder;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.roundRect(220, 180, 520, 280, 10);
+    ctx.stroke();
+
+    // Walls
+    const wallGrad = ctx.createLinearGradient(0, 0, 0, 100);
+    wallGrad.addColorStop(0, palette.wallTop);
+    wallGrad.addColorStop(1, palette.wallBottom);
+    ctx.fillStyle = wallGrad;
+    ctx.fillRect(0, 0, 960, 100);
+
+    for (let x = 20; x < 940; x += 80) {
+      ctx.fillStyle = palette.wallPanel;
+      ctx.beginPath();
+      ctx.roundRect(x, 15, 60, 70, 5);
+      ctx.fill();
+
+      ctx.fillStyle = palette.wallPanelInner;
+      ctx.beginPath();
+      ctx.roundRect(x + 8, 23, 44, 54, 3);
+      ctx.fill();
+    }
+
+    ctx.fillStyle = palette.molding;
+    ctx.fillRect(0, 95, 960, 10);
+
+    ctx.fillStyle = palette.wainscot;
+    ctx.fillRect(0, 580, 960, 60);
+    ctx.fillStyle = palette.wainscotAccent;
+    ctx.fillRect(0, 580, 960, 8);
+  }
+
+  private getInteriorPalette(theme: BackgroundTheme): {
+    floorPlanks: string[];
+    floorTile: string;
+    floorTileLine: string;
+    carpetCenter: string;
+    carpetMid: string;
+    carpetOuter: string;
+    carpetBorder: string;
+    carpetInnerBorder: string;
+    wallTop: string;
+    wallBottom: string;
+    wallPanel: string;
+    wallPanelInner: string;
+    molding: string;
+    wainscot: string;
+    wainscotAccent: string;
+  } {
+    const palette = {
+      floorPlanks: ['#6b5344', '#5d4a3a', '#7a6050', '#645040'],
+      floorTile: '#bfc7cf',
+      floorTileLine: 'rgba(0,0,0,0.15)',
+      carpetCenter: '#8B2323',
+      carpetMid: '#6B1010',
+      carpetOuter: '#4B0808',
+      carpetBorder: '#DAA520',
+      carpetInnerBorder: '#B8860B',
+      wallTop: '#2d1810',
+      wallBottom: '#4a2820',
+      wallPanel: '#3d2820',
+      wallPanelInner: '#4a3530',
+      molding: '#5a4a40',
+      wainscot: '#3d2820',
+      wainscotAccent: '#4a3530',
+    };
+
+    const overrides: Partial<typeof palette> = {};
+    if (theme === 'ballroom') {
+      overrides.carpetCenter = '#6f2da8';
+      overrides.carpetMid = '#4f1975';
+      overrides.carpetOuter = '#3a0f55';
+      overrides.carpetBorder = '#e0b85c';
+      overrides.floorPlanks = ['#7a624f', '#6a5445', '#806856', '#705948'];
+    } else if (theme === 'hospital') {
+      overrides.carpetCenter = '#d9f0f5';
+      overrides.carpetMid = '#b8dce5';
+      overrides.carpetOuter = '#9cc7d1';
+      overrides.carpetBorder = '#7aa6b0';
+      overrides.carpetInnerBorder = '#5f8d96';
+      overrides.wallTop = '#e6f2f5';
+      overrides.wallBottom = '#c8dde3';
+      overrides.wallPanel = '#d3e6ea';
+      overrides.wallPanelInner = '#c0d8de';
+      overrides.wainscot = '#c8dde3';
+      overrides.wainscotAccent = '#b3cbd1';
+      overrides.floorTile = '#d8e3e6';
+    } else if (theme === 'boardroom') {
+      overrides.carpetCenter = '#2f3b4a';
+      overrides.carpetMid = '#273241';
+      overrides.carpetOuter = '#1f2835';
+      overrides.carpetBorder = '#8b9db1';
+      overrides.carpetInnerBorder = '#6f8096';
+      overrides.floorPlanks = ['#4a3b2f', '#3f3228', '#533f32', '#443629'];
+    } else if (theme === 'tech') {
+      overrides.carpetCenter = '#1e2b3a';
+      overrides.carpetMid = '#18222f';
+      overrides.carpetOuter = '#111924';
+      overrides.carpetBorder = '#2e7ea5';
+      overrides.carpetInnerBorder = '#1c5a77';
+      overrides.wallTop = '#1a2430';
+      overrides.wallBottom = '#263443';
+      overrides.wallPanel = '#2a394b';
+      overrides.wallPanelInner = '#31485f';
+      overrides.molding = '#3c566f';
+      overrides.wainscot = '#233140';
+      overrides.wainscotAccent = '#2f455b';
+      overrides.floorTile = '#283846';
+      overrides.floorTileLine = 'rgba(255,255,255,0.08)';
+    } else if (theme === 'newsroom') {
+      overrides.carpetCenter = '#3d2f2f';
+      overrides.carpetMid = '#2f2323';
+      overrides.carpetOuter = '#221818';
+      overrides.carpetBorder = '#c29f7c';
+      overrides.carpetInnerBorder = '#a88768';
+      overrides.wallTop = '#2f2a28';
+      overrides.wallBottom = '#433a36';
+    } else if (theme === 'studio') {
+      overrides.carpetCenter = '#2d2d2d';
+      overrides.carpetMid = '#232323';
+      overrides.carpetOuter = '#1a1a1a';
+      overrides.carpetBorder = '#6f6f6f';
+      overrides.carpetInnerBorder = '#4f4f4f';
+      overrides.wallTop = '#2b2b2b';
+      overrides.wallBottom = '#3a3a3a';
+      overrides.wallPanel = '#383838';
+      overrides.wallPanelInner = '#2f2f2f';
+      overrides.floorTile = '#2a2a2a';
+      overrides.floorTileLine = 'rgba(255,255,255,0.1)';
+    } else if (theme === 'apartment') {
+      overrides.carpetCenter = '#7b4c2e';
+      overrides.carpetMid = '#643b22';
+      overrides.carpetOuter = '#4c2c18';
+      overrides.carpetBorder = '#d2a072';
+      overrides.carpetInnerBorder = '#b98755';
+      overrides.wallTop = '#3a2c25';
+      overrides.wallBottom = '#4b3a32';
+      overrides.wainscot = '#4b3a32';
+      overrides.wainscotAccent = '#5b4740';
+    }
+
+    return { ...palette, ...overrides };
+  }
+
+  private drawWoodFloor(ctx: CanvasRenderingContext2D, colors: string[]): void {
     for (let y = 0; y < 640; y += 20) {
       for (let x = 0; x < 960; x += 60) {
-        const colorIndex = ((x / 60) + (y / 20)) % woodColors.length;
-        ctx.fillStyle = woodColors[colorIndex];
+        const colorIndex = ((x / 60) + (y / 20)) % colors.length;
+        ctx.fillStyle = colors[colorIndex];
         ctx.fillRect(x, y, 60, 20);
-        
-        // Plank lines
+
         ctx.strokeStyle = 'rgba(0,0,0,0.2)';
         ctx.lineWidth = 1;
         ctx.strokeRect(x, y, 60, 20);
       }
     }
-    
-    // Rich carpet in center
-    const carpetGrad = ctx.createRadialGradient(480, 320, 0, 480, 320, 250);
-    carpetGrad.addColorStop(0, '#8B2323');
-    carpetGrad.addColorStop(0.7, '#6B1010');
-    carpetGrad.addColorStop(1, '#4B0808');
-    ctx.fillStyle = carpetGrad;
-    ctx.beginPath();
-    ctx.roundRect(180, 140, 600, 360, 20);
-    ctx.fill();
-    
-    // Carpet gold border
-    ctx.strokeStyle = '#DAA520';
-    ctx.lineWidth = 4;
-    ctx.beginPath();
-    ctx.roundRect(195, 155, 570, 330, 15);
-    ctx.stroke();
-    
-    // Carpet inner pattern
-    ctx.strokeStyle = '#B8860B';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.roundRect(220, 180, 520, 280, 10);
-    ctx.stroke();
-    
-    // Walls - dark wood paneled
-    const wallGrad = ctx.createLinearGradient(0, 0, 0, 100);
-    wallGrad.addColorStop(0, '#2d1810');
-    wallGrad.addColorStop(1, '#4a2820');
-    ctx.fillStyle = wallGrad;
-    ctx.fillRect(0, 0, 960, 100);
-    
-    // Wall panels
-    for (let x = 20; x < 940; x += 80) {
-      ctx.fillStyle = '#3d2820';
-      ctx.beginPath();
-      ctx.roundRect(x, 15, 60, 70, 5);
-      ctx.fill();
-      
-      // Panel inner
-      ctx.fillStyle = '#4a3530';
-      ctx.beginPath();
-      ctx.roundRect(x + 8, 23, 44, 54, 3);
-      ctx.fill();
+  }
+
+  private drawTileFloor(
+    ctx: CanvasRenderingContext2D,
+    tileColor: string,
+    lineColor: string
+  ): void {
+    ctx.fillStyle = tileColor;
+    ctx.fillRect(0, 0, 960, 640);
+    ctx.strokeStyle = lineColor;
+    ctx.lineWidth = 1;
+    for (let y = 0; y < 640; y += 40) {
+      for (let x = 0; x < 960; x += 40) {
+        ctx.strokeRect(x, y, 40, 40);
+      }
     }
-    
-    // Wall crown molding
-    ctx.fillStyle = '#5a4a40';
-    ctx.fillRect(0, 95, 960, 10);
-    
-    // Wainscoting bottom
-    ctx.fillStyle = '#3d2820';
-    ctx.fillRect(0, 580, 960, 60);
-    ctx.fillStyle = '#4a3530';
-    ctx.fillRect(0, 580, 960, 8);
-    
-    // Furniture
-    
+  }
+
+  private drawThemeProps(ctx: CanvasRenderingContext2D, theme: BackgroundTheme): void {
+    switch (theme) {
+      case 'study':
+        this.drawStudyProps(ctx);
+        break;
+      case 'ballroom':
+        this.drawBallroomProps(ctx);
+        break;
+      case 'hospital':
+        this.drawHospitalProps(ctx);
+        break;
+      case 'boardroom':
+        this.drawBoardroomProps(ctx);
+        break;
+      case 'tech':
+        this.drawTechProps(ctx);
+        break;
+      case 'newsroom':
+        this.drawNewsroomProps(ctx);
+        break;
+      case 'studio':
+        this.drawStudioProps(ctx);
+        break;
+      case 'apartment':
+        this.drawApartmentProps(ctx);
+        break;
+      default:
+        this.drawStudyProps(ctx);
+        break;
+    }
+  }
+
+  private drawStudyProps(ctx: CanvasRenderingContext2D): void {
     // Large desk (right side)
     ctx.fillStyle = '#3a2515';
     ctx.beginPath();
@@ -402,27 +612,23 @@ export class PreloadScene extends Phaser.Scene {
     ctx.beginPath();
     ctx.roundRect(730, 55, 180, 70, 5);
     ctx.fill();
-    
-    // Desk legs
+
     ctx.fillStyle = '#2a1505';
     ctx.fillRect(730, 130, 15, 50);
     ctx.fillRect(895, 130, 15, 50);
-    
+
     // Bookshelf (left side)
     ctx.fillStyle = '#3a2515';
     ctx.fillRect(40, 50, 120, 200);
     ctx.fillStyle = '#2a1505';
     ctx.fillRect(45, 55, 110, 190);
-    
-    // Books on shelf
+
     const bookColors = ['#8B0000', '#00008B', '#006400', '#4B0082', '#8B4513'];
     for (let shelf = 0; shelf < 4; shelf++) {
       const shelfY = 65 + shelf * 45;
-      // Shelf
       ctx.fillStyle = '#3a2515';
       ctx.fillRect(45, shelfY + 35, 110, 8);
-      
-      // Books
+
       let bookX = 50;
       while (bookX < 145) {
         const bookWidth = 8 + Math.random() * 12;
@@ -432,23 +638,21 @@ export class PreloadScene extends Phaser.Scene {
         bookX += bookWidth + 2;
       }
     }
-    
+
     // Armchair (bottom left)
     ctx.fillStyle = '#4a1818';
     ctx.beginPath();
     ctx.roundRect(60, 450, 100, 80, 15);
     ctx.fill();
-    // Chair cushion
     ctx.fillStyle = '#6a2828';
     ctx.beginPath();
     ctx.roundRect(70, 460, 80, 50, 10);
     ctx.fill();
-    // Chair back
     ctx.fillStyle = '#4a1818';
     ctx.beginPath();
     ctx.roundRect(55, 420, 110, 40, [15, 15, 0, 0]);
     ctx.fill();
-    
+
     // Fireplace (top center)
     ctx.fillStyle = '#555555';
     ctx.fillRect(380, 5, 200, 95);
@@ -456,14 +660,218 @@ export class PreloadScene extends Phaser.Scene {
     ctx.fillRect(400, 30, 160, 65);
     ctx.fillStyle = '#1a1a1a';
     ctx.fillRect(410, 40, 140, 50);
-    // Fire glow
     const fireGrad = ctx.createRadialGradient(480, 70, 0, 480, 70, 30);
     fireGrad.addColorStop(0, 'rgba(255,100,0,0.3)');
     fireGrad.addColorStop(1, 'rgba(255,50,0,0)');
     ctx.fillStyle = fireGrad;
     ctx.fillRect(410, 40, 140, 50);
-    
-    this.textures.addImage('room_background', canvas as any);
+  }
+
+  private drawBoardroomProps(ctx: CanvasRenderingContext2D): void {
+    ctx.fillStyle = '#2b1b12';
+    ctx.beginPath();
+    ctx.roundRect(260, 240, 440, 160, 16);
+    ctx.fill();
+    ctx.fillStyle = '#3a2a1f';
+    ctx.beginPath();
+    ctx.roundRect(280, 250, 400, 140, 12);
+    ctx.fill();
+
+    ctx.fillStyle = '#1e120b';
+    for (let i = 0; i < 6; i++) {
+      ctx.roundRect(260 + i * 70, 210, 40, 30, 6);
+      ctx.roundRect(260 + i * 70, 400, 40, 30, 6);
+      ctx.fill();
+    }
+
+    ctx.fillStyle = '#24303a';
+    ctx.roundRect(720, 90, 160, 60, 8);
+    ctx.fill();
+  }
+
+  private drawBallroomProps(ctx: CanvasRenderingContext2D): void {
+    ctx.fillStyle = '#5a3b2b';
+    ctx.fillRect(260, 70, 440, 60);
+    ctx.fillStyle = '#8a5c3a';
+    ctx.fillRect(280, 80, 400, 40);
+
+    ctx.fillStyle = '#d8c47a';
+    ctx.beginPath();
+    ctx.arc(480, 140, 28, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = '#bfa85a';
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.arc(480, 140, 40, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.fillStyle = 'rgba(255, 215, 120, 0.35)';
+    ctx.beginPath();
+    ctx.arc(480, 300, 120, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  private drawHospitalProps(ctx: CanvasRenderingContext2D): void {
+    ctx.fillStyle = '#f5f7f8';
+    ctx.fillRect(160, 210, 200, 90);
+    ctx.fillRect(600, 210, 200, 90);
+    ctx.fillStyle = '#c9d4da';
+    ctx.fillRect(170, 220, 180, 50);
+    ctx.fillRect(610, 220, 180, 50);
+
+    ctx.fillStyle = '#8aa4b4';
+    ctx.fillRect(170, 270, 30, 30);
+    ctx.fillRect(760, 270, 30, 30);
+
+    ctx.fillStyle = '#b6cdd8';
+    ctx.fillRect(420, 180, 120, 70);
+    ctx.fillStyle = '#94acb8';
+    ctx.fillRect(430, 190, 100, 20);
+  }
+
+  private drawTechProps(ctx: CanvasRenderingContext2D): void {
+    ctx.fillStyle = '#1a2028';
+    ctx.fillRect(70, 120, 120, 300);
+    ctx.fillRect(770, 120, 120, 300);
+    ctx.fillStyle = '#2d3b4a';
+    for (let y = 140; y < 380; y += 40) {
+      ctx.fillRect(85, y, 90, 20);
+      ctx.fillRect(785, y, 90, 20);
+    }
+    ctx.fillStyle = '#1d2f3d';
+    ctx.beginPath();
+    ctx.roundRect(340, 230, 280, 120, 12);
+    ctx.fill();
+    ctx.fillStyle = '#4bb5ff';
+    ctx.fillRect(370, 260, 80, 10);
+    ctx.fillRect(470, 260, 80, 10);
+    ctx.fillRect(570, 260, 20, 10);
+  }
+
+  private drawNewsroomProps(ctx: CanvasRenderingContext2D): void {
+    ctx.fillStyle = '#3a2c24';
+    for (let row = 0; row < 2; row++) {
+      const y = 210 + row * 120;
+      for (let i = 0; i < 3; i++) {
+        const x = 180 + i * 220;
+        ctx.fillRect(x, y, 160, 50);
+        ctx.fillStyle = '#1d1f2a';
+        ctx.fillRect(x + 20, y - 20, 40, 20);
+        ctx.fillStyle = '#3a2c24';
+      }
+    }
+    ctx.fillStyle = '#2b2b2b';
+    ctx.fillRect(760, 80, 140, 80);
+    ctx.fillStyle = '#4c7d99';
+    ctx.fillRect(780, 100, 100, 40);
+  }
+
+  private drawStudioProps(ctx: CanvasRenderingContext2D): void {
+    ctx.fillStyle = '#1e1e1e';
+    ctx.fillRect(300, 260, 360, 120);
+    ctx.fillStyle = '#3b3b3b';
+    for (let x = 320; x < 620; x += 40) {
+      ctx.fillRect(x, 280, 20, 60);
+    }
+    ctx.fillStyle = '#111111';
+    ctx.fillRect(220, 200, 60, 120);
+    ctx.fillRect(680, 200, 60, 120);
+    ctx.fillStyle = '#444444';
+    ctx.beginPath();
+    ctx.arc(250, 240, 18, 0, Math.PI * 2);
+    ctx.arc(710, 240, 18, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = '#2e2e2e';
+    for (let x = 80; x < 880; x += 80) {
+      ctx.fillRect(x, 20, 40, 60);
+    }
+  }
+
+  private drawApartmentProps(ctx: CanvasRenderingContext2D): void {
+    ctx.fillStyle = '#5b3a2a';
+    ctx.fillRect(80, 420, 200, 90);
+    ctx.fillStyle = '#7a4f3a';
+    ctx.fillRect(90, 440, 180, 50);
+
+    ctx.fillStyle = '#3a2f24';
+    ctx.fillRect(700, 120, 180, 60);
+    ctx.fillStyle = '#594535';
+    ctx.fillRect(710, 130, 160, 20);
+
+    ctx.fillStyle = '#2f5f2f';
+    ctx.beginPath();
+    ctx.arc(860, 420, 30, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#4a2f1f';
+    ctx.fillRect(856, 440, 8, 30);
+  }
+
+  private drawTrainCar(ctx: CanvasRenderingContext2D): void {
+    ctx.fillStyle = '#2b2f33';
+    ctx.fillRect(0, 0, 960, 640);
+
+    ctx.fillStyle = '#3a3f45';
+    for (let x = 0; x < 960; x += 60) {
+      ctx.fillRect(x, 240, 40, 180);
+      ctx.fillRect(x + 20, 240, 10, 180);
+    }
+
+    ctx.fillStyle = '#6b7075';
+    ctx.fillRect(0, 80, 960, 120);
+    ctx.fillStyle = '#a3b1bf';
+    for (let x = 60; x < 900; x += 140) {
+      ctx.fillRect(x, 100, 100, 60);
+      ctx.fillStyle = '#4a6072';
+      ctx.fillRect(x + 8, 108, 84, 44);
+      ctx.fillStyle = '#a3b1bf';
+    }
+
+    ctx.fillStyle = '#1b1b1b';
+    ctx.fillRect(0, 0, 960, 40);
+    ctx.fillStyle = '#51565c';
+    ctx.fillRect(0, 40, 960, 20);
+
+    ctx.fillStyle = '#444';
+    ctx.fillRect(0, 500, 960, 140);
+    ctx.fillStyle = '#5a5a5a';
+    for (let x = 40; x < 920; x += 220) {
+      ctx.fillRect(x, 520, 180, 50);
+      ctx.fillRect(x, 580, 180, 30);
+    }
+  }
+
+  private drawAlley(ctx: CanvasRenderingContext2D): void {
+    ctx.fillStyle = '#2f2c28';
+    ctx.fillRect(0, 0, 960, 640);
+    ctx.strokeStyle = '#3b362f';
+    for (let y = 0; y < 640; y += 40) {
+      for (let x = 0; x < 960; x += 60) {
+        ctx.strokeRect(x, y, 60, 40);
+      }
+    }
+
+    ctx.fillStyle = '#3a2d24';
+    ctx.fillRect(0, 0, 960, 140);
+    ctx.fillStyle = '#4c3b2f';
+    ctx.fillRect(0, 140, 960, 20);
+
+    ctx.fillStyle = '#2c3438';
+    ctx.fillRect(100, 380, 80, 60);
+    ctx.fillRect(780, 360, 100, 80);
+    ctx.fillStyle = '#5a5f66';
+    ctx.fillRect(110, 390, 60, 40);
+    ctx.fillRect(790, 370, 80, 60);
+
+    ctx.fillStyle = '#c9a227';
+    ctx.fillRect(840, 40, 20, 80);
+    ctx.beginPath();
+    ctx.arc(850, 30, 18, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = 'rgba(201,162,39,0.3)';
+    ctx.beginPath();
+    ctx.arc(850, 90, 60, 0, Math.PI * 2);
+    ctx.fill();
   }
 
   private generateClueIcon(): void {

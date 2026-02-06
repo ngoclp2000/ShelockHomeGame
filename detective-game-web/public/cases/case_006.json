@@ -9,31 +9,43 @@
       "id": "clue_ai_exception",
       "name": "Log ngoại lệ AI",
       "description": "Hệ thống báo lỗi lệnh xung đột từ hai tài khoản khác nhau.",
-      "tags": ["công nghệ", "log"]
+      "tags": [
+        "công nghệ",
+        "log"
+      ]
     },
     {
       "id": "clue_override_card",
       "name": "Thẻ quản trị bị dùng",
       "description": "Thẻ quản trị được quẹt lúc 22:41, trùng khoảng trống log.",
-      "tags": ["log"]
+      "tags": [
+        "log"
+      ]
     },
     {
       "id": "clue_motion_blindspot",
       "name": "Vùng mù cảm biến",
       "description": "Một cảm biến chuyển động bị che trong 3 phút bởi băng dính.",
-      "tags": ["dấu vết"]
+      "tags": [
+        "dấu vết"
+      ]
     },
     {
       "id": "clue_ai_voice",
       "name": "Lệnh giọng nói giả",
       "description": "AI ghi nhận lệnh giọng nói phát từ loa, không phải người thật.",
-      "tags": ["công nghệ"]
+      "tags": [
+        "công nghệ"
+      ]
     },
     {
       "id": "clue_server_room",
       "name": "Cửa phòng máy mở",
       "description": "Cửa phòng máy mở đúng 2 phút trước thời điểm tử vong.",
-      "tags": ["log", "đường đi"]
+      "tags": [
+        "log",
+        "đường đi"
+      ]
     }
   ],
   "suspects": [
@@ -47,7 +59,12 @@
           "id": "q_admin_1",
           "text": "Anh có dùng thẻ quản trị đêm đó không?",
           "answer": "Tôi không vào tòa nhà, thẻ ở văn phòng.",
-          "unlocks": {"questions": [], "clues": ["clue_override_card"]}
+          "unlocks": {
+            "questions": [],
+            "clues": [
+              "clue_override_card"
+            ]
+          }
         }
       ]
     },
@@ -61,7 +78,12 @@
           "id": "q_guard_1",
           "text": "Vì sao cảm biến bị che?",
           "answer": "Tôi không thấy ai lại gần cảm biến đó.",
-          "unlocks": {"questions": [], "clues": ["clue_motion_blindspot"]}
+          "unlocks": {
+            "questions": [],
+            "clues": [
+              "clue_motion_blindspot"
+            ]
+          }
         }
       ]
     },
@@ -75,27 +97,54 @@
           "id": "q_ceo_1",
           "text": "Ông có ra lệnh giọng nói cho AI không?",
           "answer": "Tôi không sử dụng tính năng đó.",
-          "unlocks": {"questions": [], "clues": ["clue_ai_voice"]}
+          "unlocks": {
+            "questions": [],
+            "clues": [
+              "clue_ai_voice"
+            ]
+          }
         }
       ]
     }
   ],
   "motives": [
-    {"id": "motive_coverup", "text": "Che giấu hồ sơ"},
-    {"id": "motive_profit", "text": "Lợi ích tài chính"},
-    {"id": "motive_revenge", "text": "Trả thù"},
-    {"id": "motive_blackmail", "text": "Bị tống tiền"}
+    {
+      "id": "motive_coverup",
+      "text": "Che giấu hồ sơ"
+    },
+    {
+      "id": "motive_profit",
+      "text": "Lợi ích tài chính"
+    },
+    {
+      "id": "motive_revenge",
+      "text": "Trả thù"
+    },
+    {
+      "id": "motive_blackmail",
+      "text": "Bị tống tiền"
+    }
   ],
   "weapons": [
-    {"id": "weapon_poison", "text": "Thuốc độc"},
-    {"id": "weapon_blunt", "text": "Vật nặng"},
-    {"id": "weapon_choking", "text": "Siết cổ"}
+    {
+      "id": "weapon_poison",
+      "text": "Thuốc độc"
+    },
+    {
+      "id": "weapon_blunt",
+      "text": "Vật nặng"
+    },
+    {
+      "id": "weapon_choking",
+      "text": "Siết cổ"
+    }
   ],
   "solution": {
     "killerId": "suspect_admin",
     "motiveId": "motive_coverup",
     "weaponId": "weapon_poison",
     "keyEvidenceId": "clue_override_card",
-    "explanation": "**Kết luận:** Quản trị Duy là hung thủ.\n\n**Diễn biến:**\n1. Duy dùng thẻ quản trị để tạo khoảng trống log và giả lệnh giọng nói cho AI.\n2. Che cảm biến để né ghi nhận chuyển động rồi tiếp cận nạn nhân.\n3. Khoảng trống 2 phút và log thẻ quản trị vạch trần hành vi.\n\n**Bằng chứng quyết định:** Thẻ quản trị và log ngoại lệ AI." 
-  }
+    "explanation": "**Kết luận:** Quản trị Duy là hung thủ.\n\n**Diễn biến:**\n1. Duy dùng thẻ quản trị để tạo khoảng trống log và giả lệnh giọng nói cho AI.\n2. Che cảm biến để né ghi nhận chuyển động rồi tiếp cận nạn nhân.\n3. Khoảng trống 2 phút và log thẻ quản trị vạch trần hành vi.\n\n**Bằng chứng quyết định:** Thẻ quản trị và log ngoại lệ AI."
+  },
+  "backgroundTheme": "tech"
 }
