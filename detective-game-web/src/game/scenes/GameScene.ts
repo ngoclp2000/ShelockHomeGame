@@ -88,7 +88,15 @@ export class GameScene extends Phaser.Scene {
     const height = 640 * SCALE;
     
     // Use the beautiful generated room background
-    if (this.textures.exists('room_background')) {
+    const caseData = CaseLoader.getCurrentCase();
+    const themeKey = caseData?.backgroundTheme
+      ? `room_background_${caseData.backgroundTheme}`
+      : 'room_background';
+
+    if (this.textures.exists(themeKey)) {
+      const bg = this.add.image(width / 2, height / 2, themeKey);
+      bg.setDepth(0);
+    } else if (this.textures.exists('room_background')) {
       const bg = this.add.image(width / 2, height / 2, 'room_background');
       bg.setDepth(0);
     } else {
@@ -211,11 +219,7 @@ export class GameScene extends Phaser.Scene {
       this.interactables.push(interactable);
     });
 
-    // NPC positions - should be in open areas on carpet
-    const npcPositions = [
-      { x: 380 * SCALE, y: 300 * SCALE },  // Center-left on carpet
-      { x: 550 * SCALE, y: 320 * SCALE },  // Center-right on carpet
-    ];
+    const npcPositions = this.getNpcPositions(caseData.suspects.length, SCALE);
 
     console.log(`Spawning ${caseData.suspects.length} NPCs`);
 
@@ -243,6 +247,33 @@ export class GameScene extends Phaser.Scene {
       body.setCollideWorldBounds(true);
     }
     this.physics.world.setBounds(32 * SCALE, 32 * SCALE, 896 * SCALE, 576 * SCALE);
+  }
+
+  private getNpcPositions(
+    count: number,
+    scale: number
+  ): { x: number; y: number }[] {
+    const centerX = 480 * scale;
+    const centerY = 320 * scale;
+    const radiusX = 140 * scale;
+    const radiusY = 90 * scale;
+
+    if (count <= 1) {
+      return [{ x: centerX, y: centerY }];
+    }
+
+    const positions: { x: number; y: number }[] = [];
+    const angleStep = (Math.PI * 2) / count;
+    const startAngle = -Math.PI / 2;
+    for (let i = 0; i < count; i++) {
+      const angle = startAngle + angleStep * i;
+      positions.push({
+        x: centerX + Math.cos(angle) * radiusX,
+        y: centerY + Math.sin(angle) * radiusY,
+      });
+    }
+
+    return positions;
   }
 
   private loadSaveData(): void {

@@ -9,31 +9,43 @@
       "id": "clue_perfume_trail",
       "name": "Mùi nước hoa hiếm",
       "description": "Một mùi nước hoa gỗ hiếm lưu lại ở hành lang dẫn đến hiện trường.",
-      "tags": ["dấu vết", "mùi"]
+      "tags": [
+        "dấu vết",
+        "mùi"
+      ]
     },
     {
       "id": "clue_mask_ribbon",
       "name": "Ruy băng mặt nạ bị rách",
       "description": "Mặt nạ bị rách ruy băng, dính trên tay nắm cửa kho.",
-      "tags": ["vật chứng"]
+      "tags": [
+        "vật chứng"
+      ]
     },
     {
       "id": "clue_swapped_invite",
       "name": "Thiệp mời bị tráo",
       "description": "Một thiệp mời có chữ ký giả, cho thấy có người mạo danh.",
-      "tags": ["tài liệu"]
+      "tags": [
+        "tài liệu"
+      ]
     },
     {
       "id": "clue_makeup_smudge",
       "name": "Vết trang điểm lem",
       "description": "Vết trang điểm màu vàng dính trên găng tay, khác với màu trang điểm của nạn nhân.",
-      "tags": ["dấu vết"]
+      "tags": [
+        "dấu vết"
+      ]
     },
     {
       "id": "clue_time_stamp_photo",
       "name": "Ảnh chụp lệch mốc",
       "description": "Ảnh chụp lúc 20:15 cho thấy có hai người mặc cùng trang phục xuất hiện cùng lúc.",
-      "tags": ["chứng cứ", "thời gian"]
+      "tags": [
+        "chứng cứ",
+        "thời gian"
+      ]
     }
   ],
   "suspects": [
@@ -47,7 +59,12 @@
           "id": "q_host_1",
           "text": "Có bao nhiêu người mặc cùng trang phục?",
           "answer": "Tôi chỉ thấy một người, chắc là khách VIP.",
-          "unlocks": {"questions": [], "clues": ["clue_time_stamp_photo"]}
+          "unlocks": {
+            "questions": [],
+            "clues": [
+              "clue_time_stamp_photo"
+            ]
+          }
         }
       ]
     },
@@ -61,7 +78,12 @@
           "id": "q_designer_1",
           "text": "Anh có làm nhiều bộ đồ giống nhau không?",
           "answer": "Tôi chỉ làm một bộ, nhưng phụ tá có thể sao chép.",
-          "unlocks": {"questions": [], "clues": ["clue_swapped_invite"]}
+          "unlocks": {
+            "questions": [],
+            "clues": [
+              "clue_swapped_invite"
+            ]
+          }
         }
       ]
     },
@@ -75,27 +97,54 @@
           "id": "q_assistant_1",
           "text": "Cô có dùng loại nước hoa gỗ này không?",
           "answer": "Đó là mùi nước hoa tôi dùng, nhưng ai cũng có thể mua.",
-          "unlocks": {"questions": [], "clues": ["clue_perfume_trail"]}
+          "unlocks": {
+            "questions": [],
+            "clues": [
+              "clue_perfume_trail"
+            ]
+          }
         }
       ]
     }
   ],
   "motives": [
-    {"id": "motive_theft", "text": "Trộm cắp đồ cổ"},
-    {"id": "motive_envy", "text": "Ghen tị danh tiếng"},
-    {"id": "motive_coverup", "text": "Che giấu giả mạo"},
-    {"id": "motive_blackmail", "text": "Bị tống tiền"}
+    {
+      "id": "motive_theft",
+      "text": "Trộm cắp đồ cổ"
+    },
+    {
+      "id": "motive_envy",
+      "text": "Ghen tị danh tiếng"
+    },
+    {
+      "id": "motive_coverup",
+      "text": "Che giấu giả mạo"
+    },
+    {
+      "id": "motive_blackmail",
+      "text": "Bị tống tiền"
+    }
   ],
   "weapons": [
-    {"id": "weapon_needle", "text": "Kim tẩm độc"},
-    {"id": "weapon_glass", "text": "Ly thủy tinh"},
-    {"id": "weapon_rope", "text": "Dây rút"}
+    {
+      "id": "weapon_needle",
+      "text": "Kim tẩm độc"
+    },
+    {
+      "id": "weapon_glass",
+      "text": "Ly thủy tinh"
+    },
+    {
+      "id": "weapon_rope",
+      "text": "Dây rút"
+    }
   ],
   "solution": {
     "killerId": "suspect_assistant",
     "motiveId": "motive_theft",
     "weaponId": "weapon_needle",
     "keyEvidenceId": "clue_time_stamp_photo",
-    "explanation": "**Kết luận:** Phụ tá Hạnh là hung thủ.\n\n**Diễn biến:**\n1. Hạnh sao chép trang phục và giả danh khách VIP để tiếp cận kho đồ cổ.\n2. Cô dùng kim tẩm độc, sau đó trộn lẫn trong đám đông hóa trang.\n3. Ảnh chụp cùng mốc thời gian cho thấy có hai người mặc cùng trang phục, phá vỡ lời khai.\n\n**Bằng chứng quyết định:** Ảnh chụp lệch mốc và mùi nước hoa hiếm." 
-  }
+    "explanation": "**Kết luận:** Phụ tá Hạnh là hung thủ.\n\n**Diễn biến:**\n1. Hạnh sao chép trang phục và giả danh khách VIP để tiếp cận kho đồ cổ.\n2. Cô dùng kim tẩm độc, sau đó trộn lẫn trong đám đông hóa trang.\n3. Ảnh chụp cùng mốc thời gian cho thấy có hai người mặc cùng trang phục, phá vỡ lời khai.\n\n**Bằng chứng quyết định:** Ảnh chụp lệch mốc và mùi nước hoa hiếm."
+  },
+  "backgroundTheme": "ballroom"
 }

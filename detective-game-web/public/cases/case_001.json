@@ -9,31 +9,45 @@
       "id": "clue_clock_offset",
       "name": "Đồng hồ treo tường bị lệch",
       "description": "Đồng hồ trong phòng chạy nhanh hơn 20 phút so với đồng hồ hệ thống. Núm chỉnh đồng hồ có dấu vân tay mới.",
-      "tags": ["thời gian", "cơ chế"]
+      "tags": [
+        "thời gian",
+        "cơ chế"
+      ]
     },
     {
       "id": "clue_camera_glitch",
       "name": "Camera bị chỉnh giờ",
       "description": "Log camera cho thấy thời gian bị chỉnh thủ công lúc 21:10, đúng thời điểm diễn ra vụ án theo lời khai.",
-      "tags": ["công nghệ", "mấu chốt"]
+      "tags": [
+        "công nghệ",
+        "mấu chốt"
+      ]
     },
     {
       "id": "clue_blood_coagulation",
       "name": "Vết máu đông",
       "description": "Mức độ đông máu phù hợp với thời điểm tử vong sớm hơn 20 phút so với camera.",
-      "tags": ["pháp y"]
+      "tags": [
+        "pháp y"
+      ]
     },
     {
       "id": "clue_handprint_glove",
       "name": "Dấu găng tay mỏng",
       "description": "Dấu tay mờ trên núm chỉnh đồng hồ, loại găng latex y tế.",
-      "tags": ["dấu vết", "vật chứng"]
+      "tags": [
+        "dấu vết",
+        "vật chứng"
+      ]
     },
     {
       "id": "clue_keycard_log",
       "name": "Log thẻ từ",
       "description": "Thẻ từ của trợ lý vào phòng lúc 20:50, sớm hơn mốc camera 20 phút.",
-      "tags": ["log", "thời gian"]
+      "tags": [
+        "log",
+        "thời gian"
+      ]
     }
   ],
   "suspects": [
@@ -47,13 +61,23 @@
           "id": "q_assistant_1",
           "text": "Anh có chỉnh lại giờ camera không?",
           "answer": "Tôi chỉ đồng bộ hệ thống mỗi tuần, không chỉnh tay hôm đó.",
-          "unlocks": {"questions": ["q_assistant_2"], "clues": []}
+          "unlocks": {
+            "questions": [
+              "q_assistant_2"
+            ],
+            "clues": []
+          }
         },
         {
           "id": "q_assistant_2",
           "text": "Vì sao thẻ của anh vào phòng lúc 20:50?",
           "answer": "Tôi vào để đưa hợp đồng, nhưng ông chủ nói lát nữa ký. Tôi đi ra ngay.",
-          "unlocks": {"questions": [], "clues": ["clue_keycard_log"]}
+          "unlocks": {
+            "questions": [],
+            "clues": [
+              "clue_keycard_log"
+            ]
+          }
         }
       ]
     },
@@ -67,13 +91,23 @@
           "id": "q_security_1",
           "text": "Anh có thấy ai rời khỏi phòng sau 21:00?",
           "answer": "Không. Camera không ghi lại ai ra vào sau 21:00.",
-          "unlocks": {"questions": ["q_security_2"], "clues": []}
+          "unlocks": {
+            "questions": [
+              "q_security_2"
+            ],
+            "clues": []
+          }
         },
         {
           "id": "q_security_2",
           "text": "Anh có biết camera bị chỉnh giờ?",
           "answer": "Tôi chỉ thấy log bị chỉnh lúc 21:10 theo màn hình. Tôi không đụng vào hệ thống.",
-          "unlocks": {"questions": [], "clues": ["clue_camera_glitch"]}
+          "unlocks": {
+            "questions": [],
+            "clues": [
+              "clue_camera_glitch"
+            ]
+          }
         }
       ]
     },
@@ -87,21 +121,47 @@
           "id": "q_doctor_1",
           "text": "Bà có mặt trong tòa nhà lúc xảy ra án?",
           "answer": "Tôi đến kiểm tra sức khỏe nạn nhân lúc 20:30 rồi rời đi.",
-          "unlocks": {"questions": [], "clues": ["clue_blood_coagulation"]}
+          "unlocks": {
+            "questions": [],
+            "clues": [
+              "clue_blood_coagulation"
+            ]
+          }
         }
       ]
     }
   ],
   "motives": [
-    {"id": "motive_coverup", "text": "Che giấu sai sót y khoa"},
-    {"id": "motive_profit", "text": "Chiếm đoạt tài sản"},
-    {"id": "motive_revenge", "text": "Trả thù cá nhân"},
-    {"id": "motive_silence", "text": "Bịt miệng"}
+    {
+      "id": "motive_coverup",
+      "text": "Che giấu sai sót y khoa"
+    },
+    {
+      "id": "motive_profit",
+      "text": "Chiếm đoạt tài sản"
+    },
+    {
+      "id": "motive_revenge",
+      "text": "Trả thù cá nhân"
+    },
+    {
+      "id": "motive_silence",
+      "text": "Bịt miệng"
+    }
   ],
   "weapons": [
-    {"id": "weapon_poison", "text": "Thuốc độc"},
-    {"id": "weapon_blunt", "text": "Vật nặng"},
-    {"id": "weapon_needle", "text": "Kim tiêm"}
+    {
+      "id": "weapon_poison",
+      "text": "Thuốc độc"
+    },
+    {
+      "id": "weapon_blunt",
+      "text": "Vật nặng"
+    },
+    {
+      "id": "weapon_needle",
+      "text": "Kim tiêm"
+    }
   ],
   "solution": {
     "killerId": "suspect_assistant",
@@ -109,5 +169,6 @@
     "weaponId": "weapon_poison",
     "keyEvidenceId": "clue_camera_glitch",
     "explanation": "**Kết luận:** Trợ lý Lê Minh là hung thủ.\n\n**Diễn biến:**\n1. Minh đầu độc nạn nhân sớm hơn 20 phút rồi chỉnh đồng hồ và camera để tạo mốc thời gian giả.\n2. Log thẻ từ và vết găng tay chỉ ra Minh là người thao túng hệ thống.\n3. Thời gian đông máu chứng minh lời khai và camera đều bị đánh lạc hướng.\n\n**Bằng chứng quyết định:** Log chỉnh giờ camera và dấu găng tay trên núm đồng hồ."
-  }
+  },
+  "backgroundTheme": "study"
 }

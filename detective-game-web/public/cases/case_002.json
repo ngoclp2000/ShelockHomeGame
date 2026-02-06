@@ -9,31 +9,43 @@
       "id": "clue_vent_map",
       "name": "Sơ đồ ống thông gió",
       "description": "Sơ đồ kỹ thuật cho thấy có một ống thông gió nối giữa hai toa gần khu hành lý.",
-      "tags": ["cơ chế", "đường đi"]
+      "tags": [
+        "cơ chế",
+        "đường đi"
+      ]
     },
     {
       "id": "clue_oily_glove",
       "name": "Găng tay dính dầu",
       "description": "Găng tay dính dầu máy tàu, nằm trong toa nạn nhân.",
-      "tags": ["vật chứng"]
+      "tags": [
+        "vật chứng"
+      ]
     },
     {
       "id": "clue_power_log",
       "name": "Log điện bị ngắt",
       "description": "Bảng điện cho thấy cầu dao bị tắt thủ công từ khoang kỹ thuật.",
-      "tags": ["log", "kỹ thuật"]
+      "tags": [
+        "log",
+        "kỹ thuật"
+      ]
     },
     {
       "id": "clue_bruised_knuckles",
       "name": "Vết bầm trên tay nạn nhân",
       "description": "Nạn nhân có vết bầm mới trên tay, cho thấy đã giằng co trong không gian hẹp.",
-      "tags": ["pháp y"]
+      "tags": [
+        "pháp y"
+      ]
     },
     {
       "id": "clue_vent_scrape",
       "name": "Vết trầy trong ống thông gió",
       "description": "Bên trong ống có vết trầy kim loại và sợi vải xanh mắc lại.",
-      "tags": ["dấu vết"]
+      "tags": [
+        "dấu vết"
+      ]
     }
   ],
   "suspects": [
@@ -47,13 +59,23 @@
           "id": "q_engineer_1",
           "text": "Anh ở đâu khi tàu mất điện?",
           "answer": "Tôi ở khoang kỹ thuật để khởi động máy phát phụ.",
-          "unlocks": {"questions": ["q_engineer_2"], "clues": []}
+          "unlocks": {
+            "questions": [
+              "q_engineer_2"
+            ],
+            "clues": []
+          }
         },
         {
           "id": "q_engineer_2",
           "text": "Anh có đeo găng tay dầu không?",
           "answer": "Có, đó là găng tay làm việc của tôi.",
-          "unlocks": {"questions": [], "clues": ["clue_oily_glove"]}
+          "unlocks": {
+            "questions": [],
+            "clues": [
+              "clue_oily_glove"
+            ]
+          }
         }
       ]
     },
@@ -67,7 +89,12 @@
           "id": "q_conductor_1",
           "text": "Cửa nối giữa các toa có mở khi mất điện không?",
           "answer": "Không, khóa tự động đóng. Nhưng ống thông gió vẫn mở.",
-          "unlocks": {"questions": [], "clues": ["clue_vent_map"]}
+          "unlocks": {
+            "questions": [],
+            "clues": [
+              "clue_vent_map"
+            ]
+          }
         }
       ]
     },
@@ -81,27 +108,54 @@
           "id": "q_businessman_1",
           "text": "Ông có gặp nạn nhân tối nay?",
           "answer": "Tôi chỉ nói chuyện nhanh trước khi tàu khởi hành.",
-          "unlocks": {"questions": [], "clues": ["clue_bruised_knuckles"]}
+          "unlocks": {
+            "questions": [],
+            "clues": [
+              "clue_bruised_knuckles"
+            ]
+          }
         }
       ]
     }
   ],
   "motives": [
-    {"id": "motive_coverup", "text": "Che giấu sai phạm kỹ thuật"},
-    {"id": "motive_contract", "text": "Tranh chấp hợp đồng"},
-    {"id": "motive_revenge", "text": "Thù cá nhân"},
-    {"id": "motive_blackmail", "text": "Bị tống tiền"}
+    {
+      "id": "motive_coverup",
+      "text": "Che giấu sai phạm kỹ thuật"
+    },
+    {
+      "id": "motive_contract",
+      "text": "Tranh chấp hợp đồng"
+    },
+    {
+      "id": "motive_revenge",
+      "text": "Thù cá nhân"
+    },
+    {
+      "id": "motive_blackmail",
+      "text": "Bị tống tiền"
+    }
   ],
   "weapons": [
-    {"id": "weapon_wrench", "text": "Cờ lê"},
-    {"id": "weapon_wire", "text": "Dây siết"},
-    {"id": "weapon_poison", "text": "Khí độc"}
+    {
+      "id": "weapon_wrench",
+      "text": "Cờ lê"
+    },
+    {
+      "id": "weapon_wire",
+      "text": "Dây siết"
+    },
+    {
+      "id": "weapon_poison",
+      "text": "Khí độc"
+    }
   ],
   "solution": {
     "killerId": "suspect_engineer",
     "motiveId": "motive_coverup",
     "weaponId": "weapon_wire",
     "keyEvidenceId": "clue_vent_scrape",
-    "explanation": "**Kết luận:** Thợ máy Võ Khánh là hung thủ.\n\n**Diễn biến:**\n1. Khánh tắt cầu dao để tạo bóng tối và di chuyển qua ống thông gió.\n2. Anh ta siết nạn nhân trong khoang hẹp rồi quay lại trước khi điện bật.\n3. Vết trầy và sợi vải xanh trong ống thông gió trùng với đồng phục của Khánh.\n\n**Bằng chứng quyết định:** Dấu vết trong ống thông gió và găng tay dính dầu." 
-  }
+    "explanation": "**Kết luận:** Thợ máy Võ Khánh là hung thủ.\n\n**Diễn biến:**\n1. Khánh tắt cầu dao để tạo bóng tối và di chuyển qua ống thông gió.\n2. Anh ta siết nạn nhân trong khoang hẹp rồi quay lại trước khi điện bật.\n3. Vết trầy và sợi vải xanh trong ống thông gió trùng với đồng phục của Khánh.\n\n**Bằng chứng quyết định:** Dấu vết trong ống thông gió và găng tay dính dầu."
+  },
+  "backgroundTheme": "train"
 }
