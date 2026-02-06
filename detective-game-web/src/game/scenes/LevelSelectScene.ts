@@ -73,21 +73,21 @@ export class LevelSelectScene extends Phaser.Scene {
     this.levels = [
       {
         id: 'case_001',
-        name: 'Căn phòng khóa kín',
-        difficulty: 'Dễ',
-        description: 'Một vụ án mạng trong biệt thự. 2 nghi phạm, 5 manh mối.',
+        name: 'Phòng kín lệch thời gian',
+        difficulty: 'Khó',
+        description: 'Hiện trường khóa kín với đồng hồ và camera bị lệch.',
         clueCount: 5,
-        suspectCount: 2,
+        suspectCount: 3,
         unlocked: true,
         completed: progress.completedCases.includes('case_001'),
         stars: progress.caseStars?.case_001 || 0,
       },
       {
         id: 'case_002',
-        name: 'Bức tranh bị đánh cắp',
-        difficulty: 'Dễ',
-        description: 'Trộm cắp tại bảo tàng nghệ thuật. 3 nghi phạm.',
-        clueCount: 6,
+        name: 'Bóng tối đường hầm',
+        difficulty: 'Khó',
+        description: 'Chuyến tàu mất điện, án mạng xảy ra ở toa khác.',
+        clueCount: 5,
         suspectCount: 3,
         unlocked: progress.completedCases.includes('case_001'),
         completed: progress.completedCases.includes('case_002'),
@@ -95,62 +95,107 @@ export class LevelSelectScene extends Phaser.Scene {
       },
       {
         id: 'case_003',
-        name: 'Vụ mất tích bí ẩn',
-        difficulty: 'Trung bình',
-        description: 'Một người mất tích trong hoàn cảnh kỳ lạ.',
-        clueCount: 8,
-        suspectCount: 4,
+        name: 'Dạ hội ba kẻ giả danh',
+        difficulty: 'Khó',
+        description: 'Ba người cùng nhân dạng khiến lời khai trùng khớp.',
+        clueCount: 5,
+        suspectCount: 3,
         unlocked: progress.completedCases.includes('case_002'),
         completed: progress.completedCases.includes('case_003'),
         stars: progress.caseStars?.case_003 || 0,
       },
       {
         id: 'case_004',
-        name: 'Án mạng trên tàu tốc hành',
-        difficulty: 'Trung bình',
-        description: 'Vụ giết người trên chuyến tàu đêm.',
-        clueCount: 10,
-        suspectCount: 5,
+        name: 'Bệnh án bị tráo',
+        difficulty: 'Rất khó',
+        description: 'Mất tích trong bệnh viện với hồ sơ y tế mâu thuẫn.',
+        clueCount: 5,
+        suspectCount: 3,
         unlocked: progress.completedCases.includes('case_003'),
         completed: progress.completedCases.includes('case_004'),
         stars: progress.caseStars?.case_004 || 0,
       },
       {
         id: 'case_005',
-        name: 'Bí mật của dinh thự cổ',
-        difficulty: 'Khó',
-        description: 'Nhiều bí mật đen tối ẩn giấu trong tòa nhà.',
-        clueCount: 12,
-        suspectCount: 6,
+        name: 'Tiếng súng trong phòng cách âm',
+        difficulty: 'Rất khó',
+        description: 'Tiếng súng vang lên từ căn phòng cách âm.',
+        clueCount: 5,
+        suspectCount: 3,
         unlocked: progress.completedCases.includes('case_004'),
         completed: progress.completedCases.includes('case_005'),
         stars: progress.caseStars?.case_005 || 0,
       },
       {
         id: 'case_006',
-        name: 'Kẻ giết người hàng loạt',
+        name: 'Khoảng trống 2 phút',
         difficulty: 'Rất khó',
-        description: 'Vụ án phức tạp nhất đang chờ đợi bạn.',
-        clueCount: 15,
-        suspectCount: 8,
+        description: 'AI tòa nhà có khoảng trống log khó giải thích.',
+        clueCount: 5,
+        suspectCount: 3,
         unlocked: progress.completedCases.includes('case_005'),
         completed: progress.completedCases.includes('case_006'),
         stars: progress.caseStars?.case_006 || 0,
+      },
+      {
+        id: 'case_007',
+        name: 'Bằng chứng bị đảo ngược',
+        difficulty: 'Rất khó',
+        description: 'Chứng cứ đều chỉ một người, nhưng có thể bị dựng.',
+        clueCount: 5,
+        suspectCount: 3,
+        unlocked: progress.completedCases.includes('case_006'),
+        completed: progress.completedCases.includes('case_007'),
+        stars: progress.caseStars?.case_007 || 0,
+      },
+      {
+        id: 'case_008',
+        name: 'Hai nạn nhân, một hung thủ',
+        difficulty: 'Rất khó',
+        description: 'Hai vụ án đồng thời với nghi phạm có ngoại phạm.',
+        clueCount: 5,
+        suspectCount: 3,
+        unlocked: progress.completedCases.includes('case_007'),
+        completed: progress.completedCases.includes('case_008'),
+        stars: progress.caseStars?.case_008 || 0,
+      },
+      {
+        id: 'case_009',
+        name: 'Bản ghi âm bị cắt ghép',
+        difficulty: 'Rất khó',
+        description: 'Phân tích nhiễu nền để lật tẩy đoạn thú tội giả.',
+        clueCount: 5,
+        suspectCount: 3,
+        unlocked: progress.completedCases.includes('case_008'),
+        completed: progress.completedCases.includes('case_009'),
+        stars: progress.caseStars?.case_009 || 0,
+      },
+      {
+        id: 'case_010',
+        name: 'Vụ án không có nạn nhân',
+        difficulty: 'Rất khó',
+        description: 'Hiện trường cháy rụi nhưng không tìm thấy thi thể.',
+        clueCount: 5,
+        suspectCount: 3,
+        unlocked: progress.completedCases.includes('case_009'),
+        completed: progress.completedCases.includes('case_010'),
+        stars: progress.caseStars?.case_010 || 0,
       },
     ];
   }
 
   private createLevelCards(): void {
     const { width, height } = this.cameras.main;
-    const cardWidth = 180;
-    const cardHeight = 220;
-    const spacing = 20;
-    const startX = (width - (cardWidth * 3 + spacing * 2)) / 2 + cardWidth / 2;
-    const startY = 180;
+    const cardWidth = 150;
+    const cardHeight = 210;
+    const spacing = 16;
+    const columns = 5;
+    const startX = (width - (cardWidth * columns + spacing * (columns - 1))) / 2 + cardWidth / 2;
+    const startY = 160;
 
     this.levels.forEach((level, index) => {
-      const row = Math.floor(index / 3);
-      const col = index % 3;
+      const row = Math.floor(index / columns);
+      const col = index % columns;
       const x = startX + col * (cardWidth + spacing);
       const y = startY + row * (cardHeight + spacing);
 

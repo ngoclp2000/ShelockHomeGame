@@ -1,0 +1,101 @@
+{
+  "caseId": "case_005",
+  "title": "Tiếng súng trong phòng cách âm",
+  "difficulty": "hard",
+  "introText": "Mọi người đều nghe thấy tiếng súng, nhưng phòng cách âm không thể truyền âm.",
+  "intro": "Một buổi họp kín trong phòng cách âm kết thúc bằng cái chết của một doanh nhân. Nhân chứng đều nghe tiếng súng vang lên, nhưng phòng cách âm lại không thể truyền âm thanh ra ngoài. Kẻ thủ ác đã tạo ra tiếng súng giả.",
+  "clues": [
+    {
+      "id": "clue_speaker_wire",
+      "name": "Dây loa giấu trong tường",
+      "description": "Một đoạn dây loa mới lắp, dẫn tới hệ thống âm thanh hành lang.",
+      "tags": ["công nghệ", "âm thanh"]
+    },
+    {
+      "id": "clue_pressure_valve",
+      "name": "Van áp lực nước",
+      "description": "Van áp lực vừa được mở, tạo tiếng nổ giống tiếng súng trong ống nước.",
+      "tags": ["cơ chế"]
+    },
+    {
+      "id": "clue_silent_pistol",
+      "name": "Súng giảm thanh",
+      "description": "Một khẩu súng giảm thanh được giấu trong ngăn tủ kỹ thuật.",
+      "tags": ["vũ khí"]
+    },
+    {
+      "id": "clue_meeting_schedule",
+      "name": "Lịch họp bị chỉnh",
+      "description": "Lịch họp bị sửa để chỉ còn ba người trong phòng khi vụ án xảy ra.",
+      "tags": ["tài liệu"]
+    },
+    {
+      "id": "clue_powder_residue",
+      "name": "Bột thuốc súng",
+      "description": "Vết bột thuốc súng mịn trên áo khoác của một nghi phạm.",
+      "tags": ["pháp y"]
+    }
+  ],
+  "suspects": [
+    {
+      "id": "suspect_it",
+      "name": "Phúc (Kỹ thuật âm thanh)",
+      "avatarPath": "Avatars/it",
+      "bio": "Kỹ thuật viên phụ trách hệ thống âm thanh và ống nước.",
+      "questions": [
+        {
+          "id": "q_it_1",
+          "text": "Anh có lắp dây loa mới không?",
+          "answer": "Tôi chỉ sửa hệ thống báo cháy, không đụng vào loa.",
+          "unlocks": {"questions": [], "clues": ["clue_speaker_wire"]}
+        }
+      ]
+    },
+    {
+      "id": "suspect_partner",
+      "name": "Ngọc (Đối tác)",
+      "avatarPath": "Avatars/partner",
+      "bio": "Đối tác làm ăn, vừa tranh chấp cổ phần với nạn nhân.",
+      "questions": [
+        {
+          "id": "q_partner_1",
+          "text": "Cô có ở trong phòng khi tiếng súng vang lên?",
+          "answer": "Tôi ra ngoài gọi điện, chỉ nghe tiếng súng từ hành lang.",
+          "unlocks": {"questions": [], "clues": ["clue_meeting_schedule"]}
+        }
+      ]
+    },
+    {
+      "id": "suspect_security",
+      "name": "Tùng (Bảo vệ)",
+      "avatarPath": "Avatars/security",
+      "bio": "Bảo vệ phụ trách phòng họp và kho thiết bị.",
+      "questions": [
+        {
+          "id": "q_security_1",
+          "text": "Anh có biết về súng giảm thanh?",
+          "answer": "Tôi chỉ kiểm tra kho, không thấy gì bất thường.",
+          "unlocks": {"questions": [], "clues": ["clue_silent_pistol"]}
+        }
+      ]
+    }
+  ],
+  "motives": [
+    {"id": "motive_shares", "text": "Tranh chấp cổ phần"},
+    {"id": "motive_coverup", "text": "Che giấu rò rỉ dữ liệu"},
+    {"id": "motive_blackmail", "text": "Bị tống tiền"},
+    {"id": "motive_revenge", "text": "Trả thù"}
+  ],
+  "weapons": [
+    {"id": "weapon_gun", "text": "Súng giảm thanh"},
+    {"id": "weapon_poison", "text": "Thuốc độc"},
+    {"id": "weapon_blunt", "text": "Vật nặng"}
+  ],
+  "solution": {
+    "killerId": "suspect_it",
+    "motiveId": "motive_coverup",
+    "weaponId": "weapon_gun",
+    "keyEvidenceId": "clue_speaker_wire",
+    "explanation": "**Kết luận:** Kỹ thuật viên Phúc là hung thủ.\n\n**Diễn biến:**\n1. Phúc dùng súng giảm thanh trong phòng cách âm, đồng thời kích hoạt van áp lực để tạo tiếng súng giả ngoài hành lang.\n2. Dây loa mới lắp chứng minh việc phát âm thanh giả mạo.\n3. Bột thuốc súng trên áo khoác cho thấy Phúc đã bắn ở cự ly gần.\n\n**Bằng chứng quyết định:** Dây loa giấu trong tường và khẩu súng giảm thanh." 
+  }
+}

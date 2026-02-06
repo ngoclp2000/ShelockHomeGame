@@ -1,0 +1,101 @@
+{
+  "caseId": "case_010",
+  "title": "Vụ án không có nạn nhân",
+  "difficulty": "hard",
+  "introText": "Tất cả đều tin đã có án mạng, nhưng không tìm thấy xác. Nạn nhân có thể đang giả chết.",
+  "intro": "Một doanh nhân bị cho là đã bị sát hại sau khi căn hộ cháy rụi. Không có thi thể, nhưng toàn bộ nhân chứng đều tin ông ta đã chết. Bạn phải tìm ra sự thật đằng sau vụ giả chết này.",
+  "clues": [
+    {
+      "id": "clue_fake_blood",
+      "name": "Máu giả",
+      "description": "Mẫu máu chứa chất tạo màu công nghiệp, không phải máu người.",
+      "tags": ["pháp y"]
+    },
+    {
+      "id": "clue_passport_stamp",
+      "name": "Dấu xuất cảnh",
+      "description": "Hộ chiếu có dấu xuất cảnh trước vụ cháy 12 giờ.",
+      "tags": ["tài liệu"]
+    },
+    {
+      "id": "clue_burn_pattern",
+      "name": "Dấu cháy bất thường",
+      "description": "Vết cháy bắt đầu từ tủ hồ sơ chứ không phải bếp.",
+      "tags": ["cơ chế"]
+    },
+    {
+      "id": "clue_hidden_tunnel",
+      "name": "Lối thoát bí mật",
+      "description": "Một lối thoát ngầm nối ra bãi đậu xe cũ.",
+      "tags": ["đường đi"]
+    },
+    {
+      "id": "clue_insurance_policy",
+      "name": "Hợp đồng bảo hiểm",
+      "description": "Hợp đồng bảo hiểm mới ký, giá trị bồi thường rất lớn.",
+      "tags": ["tài liệu", "động cơ"]
+    }
+  ],
+  "suspects": [
+    {
+      "id": "suspect_partner",
+      "name": "Quỳnh (Đối tác)",
+      "avatarPath": "Avatars/partner",
+      "bio": "Đối tác kinh doanh, nợ nần chồng chất.",
+      "questions": [
+        {
+          "id": "q_partner_1",
+          "text": "Cô có biết hợp đồng bảo hiểm mới ký không?",
+          "answer": "Tôi chỉ nghe nói sơ qua, không rõ chi tiết.",
+          "unlocks": {"questions": [], "clues": ["clue_insurance_policy"]}
+        }
+      ]
+    },
+    {
+      "id": "suspect_accountant",
+      "name": "Khang (Kế toán)",
+      "avatarPath": "Avatars/accountant",
+      "bio": "Kế toán của doanh nghiệp, theo dõi dòng tiền.",
+      "questions": [
+        {
+          "id": "q_accountant_1",
+          "text": "Anh có thấy ông ấy rời khỏi thành phố không?",
+          "answer": "Tôi thấy ông ấy lấy hộ chiếu trước vụ cháy.",
+          "unlocks": {"questions": [], "clues": ["clue_passport_stamp"]}
+        }
+      ]
+    },
+    {
+      "id": "suspect_guard",
+      "name": "Bình (Bảo vệ)",
+      "avatarPath": "Avatars/security",
+      "bio": "Bảo vệ tòa nhà, nắm rõ lối thoát.",
+      "questions": [
+        {
+          "id": "q_guard_1",
+          "text": "Anh có biết lối thoát bí mật không?",
+          "answer": "Tôi chỉ nghe đồn, chưa bao giờ dùng.",
+          "unlocks": {"questions": [], "clues": ["clue_hidden_tunnel"]}
+        }
+      ]
+    }
+  ],
+  "motives": [
+    {"id": "motive_fraud", "text": "Gian lận bảo hiểm"},
+    {"id": "motive_escape", "text": "Trốn nợ"},
+    {"id": "motive_coverup", "text": "Che giấu tội phạm"},
+    {"id": "motive_revenge", "text": "Trả thù"}
+  ],
+  "weapons": [
+    {"id": "weapon_fire", "text": "Phóng hỏa"},
+    {"id": "weapon_poison", "text": "Thuốc độc"},
+    {"id": "weapon_blunt", "text": "Vật nặng"}
+  ],
+  "solution": {
+    "killerId": "suspect_partner",
+    "motiveId": "motive_fraud",
+    "weaponId": "weapon_fire",
+    "keyEvidenceId": "clue_fake_blood",
+    "explanation": "**Kết luận:** Quỳnh dàn dựng vụ giả chết để gian lận bảo hiểm.\n\n**Diễn biến:**\n1. Quỳnh và nạn nhân tạo hiện trường giả bằng máu công nghiệp và phóng hỏa.\n2. Nạn nhân trốn qua lối thoát ngầm trước khi cháy lan.\n3. Hộ chiếu và hợp đồng bảo hiểm chứng minh kế hoạch trốn nợ.\n\n**Bằng chứng quyết định:** Mẫu máu giả và dấu xuất cảnh." 
+  }
+}
