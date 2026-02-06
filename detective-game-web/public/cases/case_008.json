@@ -1,0 +1,101 @@
+{
+  "caseId": "case_008",
+  "title": "Hai nạn nhân, một hung thủ",
+  "difficulty": "hard",
+  "introText": "Hai vụ án xảy ra đồng thời ở hai nơi cách xa, trong khi nghi phạm có bằng chứng ngoại phạm.",
+  "intro": "Hai người chết gần như cùng lúc ở hai địa điểm cách nhau 20km. Dữ liệu định vị cho thấy nghi phạm chính không rời khỏi vị trí. Điều này gợi ý một sự sắp đặt trước hoặc một cơ chế giết người chậm phát tác.",
+  "clues": [
+    {
+      "id": "clue_timer_device",
+      "name": "Thiết bị hẹn giờ",
+      "description": "Một thiết bị hẹn giờ bị phá vỡ, có dấu hiệu dùng để kích hoạt cơ chế chết chậm.",
+      "tags": ["cơ chế"]
+    },
+    {
+      "id": "clue_delayed_poison",
+      "name": "Độc tố chậm phát tác",
+      "description": "Kết quả pháp y cho thấy độc tố phát tác sau 30 phút.",
+      "tags": ["pháp y"]
+    },
+    {
+      "id": "clue_location_log",
+      "name": "Log định vị",
+      "description": "Thiết bị định vị của nghi phạm không rời khỏi văn phòng suốt 2 giờ.",
+      "tags": ["log"]
+    },
+    {
+      "id": "clue_package_receipt",
+      "name": "Biên nhận giao hàng",
+      "description": "Một gói hàng gửi đến cả hai nạn nhân từ cùng một địa chỉ.",
+      "tags": ["tài liệu"]
+    },
+    {
+      "id": "clue_broken_seal",
+      "name": "Niêm phong bị phá",
+      "description": "Niêm phong hộp quà bị phá từ trước, dính dấu vân tay mới.",
+      "tags": ["dấu vết"]
+    }
+  ],
+  "suspects": [
+    {
+      "id": "suspect_manager",
+      "name": "Hào (Quản lý dự án)",
+      "avatarPath": "Avatars/manager",
+      "bio": "Quản lý dự án của cả hai nạn nhân, có lợi ích từ việc loại bỏ họ.",
+      "questions": [
+        {
+          "id": "q_manager_1",
+          "text": "Anh có gửi gói hàng cho hai nạn nhân không?",
+          "answer": "Tôi chỉ ký duyệt, việc gửi do bộ phận khác.",
+          "unlocks": {"questions": [], "clues": ["clue_package_receipt"]}
+        }
+      ]
+    },
+    {
+      "id": "suspect_courier",
+      "name": "Lan (Nhân viên giao hàng)",
+      "avatarPath": "Avatars/courier",
+      "bio": "Người giao hàng đến cả hai địa điểm, nắm rõ lịch trình.",
+      "questions": [
+        {
+          "id": "q_courier_1",
+          "text": "Chị có nhận chỉ dẫn đặc biệt nào không?",
+          "answer": "Không, chỉ giao đúng giờ và ký nhận.",
+          "unlocks": {"questions": [], "clues": ["clue_broken_seal"]}
+        }
+      ]
+    },
+    {
+      "id": "suspect_engineer",
+      "name": "Khánh (Kỹ sư thiết bị)",
+      "avatarPath": "Avatars/engineer",
+      "bio": "Thiết kế thiết bị hẹn giờ, từng làm việc với nghi phạm.",
+      "questions": [
+        {
+          "id": "q_engineer_1",
+          "text": "Anh có lắp thiết bị hẹn giờ không?",
+          "answer": "Tôi chỉ thử nghiệm, không dùng cho việc khác.",
+          "unlocks": {"questions": [], "clues": ["clue_timer_device"]}
+        }
+      ]
+    }
+  ],
+  "motives": [
+    {"id": "motive_power", "text": "Loại bỏ đối thủ"},
+    {"id": "motive_profit", "text": "Tư lợi tài chính"},
+    {"id": "motive_revenge", "text": "Trả thù"},
+    {"id": "motive_coverup", "text": "Che giấu sai phạm"}
+  ],
+  "weapons": [
+    {"id": "weapon_poison", "text": "Độc tố chậm"},
+    {"id": "weapon_device", "text": "Thiết bị hẹn giờ"},
+    {"id": "weapon_explosive", "text": "Chất nổ"}
+  ],
+  "solution": {
+    "killerId": "suspect_manager",
+    "motiveId": "motive_power",
+    "weaponId": "weapon_poison",
+    "keyEvidenceId": "clue_delayed_poison",
+    "explanation": "**Kết luận:** Quản lý Hào là hung thủ.\n\n**Diễn biến:**\n1. Hào gửi hai gói quà có độc tố chậm phát tác đến cả hai nạn nhân.\n2. Thiết bị định vị tạo ngoại phạm nhưng độc tố phát tác sau 30 phút.\n3. Biên nhận và niêm phong bị phá chứng minh gói hàng đã bị can thiệp.\n\n**Bằng chứng quyết định:** Kết quả độc tố chậm và biên nhận giao hàng." 
+  }
+}

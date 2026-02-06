@@ -1,0 +1,101 @@
+{
+  "caseId": "case_007",
+  "title": "Bằng chứng bị đảo ngược",
+  "difficulty": "hard",
+  "introText": "Mọi bằng chứng đều chỉ vào một người, nhưng tất cả đều có thể bị dựng.",
+  "intro": "Một nhà báo bị sát hại. Toàn bộ bằng chứng đều chỉ về trợ lý của nạn nhân. Nhưng mỗi chứng cứ đều có dấu hiệu bị cài đặt. Bạn phải chứng minh bằng chứng giả thay vì chỉ tìm thêm chứng cứ mới.",
+  "clues": [
+    {
+      "id": "clue_fake_fingerprint",
+      "name": "Vân tay giả",
+      "description": "Vân tay trên ly thủy tinh có dấu hiệu in đè lên lớp bụi mịn.",
+      "tags": ["pháp y", "giả mạo"]
+    },
+    {
+      "id": "clue_planted_note",
+      "name": "Ghi chú bị đặt sẵn",
+      "description": "Tờ ghi chú có mực mới nhưng giấy lại cũ, cho thấy bị đặt sau." ,
+      "tags": ["tài liệu"]
+    },
+    {
+      "id": "clue_time_mismatch",
+      "name": "Dữ liệu thời gian lệch",
+      "description": "Một file âm thanh tạo sau thời điểm nạn nhân đã chết.",
+      "tags": ["thời gian", "công nghệ"]
+    },
+    {
+      "id": "clue_camera_blind",
+      "name": "Khoảng mù camera",
+      "description": "Camera hành lang bị che bằng một poster mới dán.",
+      "tags": ["dấu vết"]
+    },
+    {
+      "id": "clue_old_key",
+      "name": "Chìa khóa cũ",
+      "description": "Chìa khóa của trợ lý bị sao chép từ trước, vết mài mới rõ ràng.",
+      "tags": ["cơ chế"]
+    }
+  ],
+  "suspects": [
+    {
+      "id": "suspect_assistant",
+      "name": "Phương (Trợ lý)",
+      "avatarPath": "Avatars/assistant",
+      "bio": "Trợ lý thân cận, bị nghi ngờ là hung thủ do chuỗi bằng chứng.",
+      "questions": [
+        {
+          "id": "q_assistant_1",
+          "text": "Cô có để lại vân tay trên ly không?",
+          "answer": "Tôi chưa bao giờ dùng chiếc ly đó.",
+          "unlocks": {"questions": [], "clues": ["clue_fake_fingerprint"]}
+        }
+      ]
+    },
+    {
+      "id": "suspect_editor",
+      "name": "Long (Biên tập viên)",
+      "avatarPath": "Avatars/editor",
+      "bio": "Biên tập viên, sợ lộ tin nội bộ từ nạn nhân.",
+      "questions": [
+        {
+          "id": "q_editor_1",
+          "text": "Anh có chỉnh sửa file âm thanh không?",
+          "answer": "Tôi chỉ lưu trữ, không chỉnh sửa.",
+          "unlocks": {"questions": [], "clues": ["clue_time_mismatch"]}
+        }
+      ]
+    },
+    {
+      "id": "suspect_source",
+      "name": "Huyền (Nguồn tin)",
+      "avatarPath": "Avatars/source",
+      "bio": "Nguồn tin bí mật, từng bị nạn nhân đe dọa.",
+      "questions": [
+        {
+          "id": "q_source_1",
+          "text": "Cô có dán poster ở hành lang không?",
+          "answer": "Không, tôi không ra hành lang đó.",
+          "unlocks": {"questions": [], "clues": ["clue_camera_blind"]}
+        }
+      ]
+    }
+  ],
+  "motives": [
+    {"id": "motive_coverup", "text": "Che giấu bí mật"},
+    {"id": "motive_revenge", "text": "Trả thù"},
+    {"id": "motive_blackmail", "text": "Bị tống tiền"},
+    {"id": "motive_power", "text": "Tranh chấp quyền lực"}
+  ],
+  "weapons": [
+    {"id": "weapon_poison", "text": "Thuốc độc"},
+    {"id": "weapon_blunt", "text": "Vật nặng"},
+    {"id": "weapon_knife", "text": "Dao"}
+  ],
+  "solution": {
+    "killerId": "suspect_editor",
+    "motiveId": "motive_coverup",
+    "weaponId": "weapon_blunt",
+    "keyEvidenceId": "clue_time_mismatch",
+    "explanation": "**Kết luận:** Biên tập viên Long là hung thủ.\n\n**Diễn biến:**\n1. Long dựng bằng chứng để đổ tội cho trợ lý, đồng thời che khoảng mù camera.\n2. File âm thanh tạo sau khi nạn nhân chết cho thấy chứng cứ bị dựng.\n3. Vân tay giả và chìa khóa bị sao chép xác nhận việc cài đặt hiện trường.\n\n**Bằng chứng quyết định:** Dữ liệu thời gian lệch và vân tay giả." 
+  }
+}

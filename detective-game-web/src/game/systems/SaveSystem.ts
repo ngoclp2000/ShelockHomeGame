@@ -176,9 +176,9 @@ export class SaveSystem {
   public static resetAll(): void {
     localStorage.removeItem(PROGRESS_KEY);
     // Also clear all case saves
-    for (let i = 1; i <= 6; i++) {
-      localStorage.removeItem(`${SAVE_PREFIX}case_00${i}`);
+    for (let i = 1; i <= 10; i++) {
+      const caseId = `case_${String(i).padStart(3, '0')}`;
+      localStorage.removeItem(`${SAVE_PREFIX}${caseId}`);
     }
   }
 }
-

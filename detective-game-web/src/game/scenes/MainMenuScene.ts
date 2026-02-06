@@ -59,7 +59,7 @@ export class MainMenuScene extends Phaser.Scene {
     // Completed cases display
     if (progress.completedCases.length > 0) {
       const totalStars = Object.values(progress.caseStars).reduce((a, b) => a + b, 0);
-      this.add.text(20 * SCALE, height - (25 * SCALE), `⭐ ${totalStars} | 📁 ${progress.completedCases.length}/6 vụ án`, {
+      this.add.text(20 * SCALE, height - (25 * SCALE), `⭐ ${totalStars} | 📁 ${progress.completedCases.length}/10 vụ án`, {
         fontSize: '24px', // 12 * 2
         color: '#666666',
       });
@@ -132,7 +132,18 @@ export class MainMenuScene extends Phaser.Scene {
   private continueGame(): void {
     // Find last played case or first incomplete
     const progress = SaveSystem.getProgress();
-    const cases = ['case_001', 'case_002', 'case_003', 'case_004', 'case_005', 'case_006'];
+    const cases = [
+      'case_001',
+      'case_002',
+      'case_003',
+      'case_004',
+      'case_005',
+      'case_006',
+      'case_007',
+      'case_008',
+      'case_009',
+      'case_010',
+    ];
     
     // Find first non-completed case that's unlocked
     let caseToPlay = 'case_001';

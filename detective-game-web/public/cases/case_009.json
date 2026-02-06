@@ -1,0 +1,101 @@
+{
+  "caseId": "case_009",
+  "title": "Bản ghi âm bị cắt ghép",
+  "difficulty": "hard",
+  "introText": "Đoạn ghi âm thú tội hoàn hảo bị nghi cắt ghép. Bạn phải chứng minh sự sai lệch tần số nền.",
+  "intro": "Một đoạn ghi âm được coi là bằng chứng then chốt, trong đó nghi phạm thừa nhận tội. Nhưng chuyên gia âm thanh phát hiện tiếng ồn nền không liên tục. Bạn phải chứng minh đoạn ghi âm bị cắt ghép.",
+  "clues": [
+    {
+      "id": "clue_audio_noise",
+      "name": "Nhiễu nền không liên tục",
+      "description": "Phổ tần số nền có hai đoạn đứt gãy nhỏ, cho thấy ghép file.",
+      "tags": ["âm thanh", "công nghệ"]
+    },
+    {
+      "id": "clue_edit_timeline",
+      "name": "Lịch sử chỉnh sửa",
+      "description": "Máy tính của nghi phạm có file dự án chỉnh sửa âm thanh.",
+      "tags": ["log"]
+    },
+    {
+      "id": "clue_room_echo",
+      "name": "Độ vang phòng",
+      "description": "Một câu nói có độ vang khác biệt so với phần còn lại.",
+      "tags": ["âm thanh"]
+    },
+    {
+      "id": "clue_mic_receipt",
+      "name": "Hóa đơn micro mới",
+      "description": "Hóa đơn mua micro cao cấp 2 ngày trước vụ án.",
+      "tags": ["tài liệu"]
+    },
+    {
+      "id": "clue_script_sheet",
+      "name": "Bản thảo lời thú tội",
+      "description": "Một tờ giấy ghi lời thoại giống hệt đoạn ghi âm.",
+      "tags": ["vật chứng"]
+    }
+  ],
+  "suspects": [
+    {
+      "id": "suspect_sound",
+      "name": "Bảo (Kỹ sư âm thanh)",
+      "avatarPath": "Avatars/sound",
+      "bio": "Kỹ sư âm thanh, có kỹ năng chỉnh sửa file.",
+      "questions": [
+        {
+          "id": "q_sound_1",
+          "text": "Anh có chỉnh sửa đoạn ghi âm không?",
+          "answer": "Tôi chỉ lọc nhiễu, không cắt ghép.",
+          "unlocks": {"questions": [], "clues": ["clue_audio_noise"]}
+        }
+      ]
+    },
+    {
+      "id": "suspect_reporter",
+      "name": "Trang (Phóng viên)",
+      "avatarPath": "Avatars/reporter",
+      "bio": "Phóng viên điều tra, muốn có bằng chứng nhanh để đăng bài.",
+      "questions": [
+        {
+          "id": "q_reporter_1",
+          "text": "Chị có giữ bản thảo lời thú tội không?",
+          "answer": "Tôi chỉ ghi chú khi phỏng vấn.",
+          "unlocks": {"questions": [], "clues": ["clue_script_sheet"]}
+        }
+      ]
+    },
+    {
+      "id": "suspect_suspect",
+      "name": "Vinh (Nghi phạm chính)",
+      "avatarPath": "Avatars/suspect",
+      "bio": "Nghi phạm chính, phủ nhận đã thú tội.",
+      "questions": [
+        {
+          "id": "q_suspect_1",
+          "text": "Anh có mua micro mới không?",
+          "answer": "Không, tôi không cần micro.",
+          "unlocks": {"questions": [], "clues": ["clue_mic_receipt"]}
+        }
+      ]
+    }
+  ],
+  "motives": [
+    {"id": "motive_sensational", "text": "Tạo tin giật gân"},
+    {"id": "motive_coverup", "text": "Che giấu sự thật"},
+    {"id": "motive_blackmail", "text": "Tống tiền"},
+    {"id": "motive_revenge", "text": "Trả thù"}
+  ],
+  "weapons": [
+    {"id": "weapon_poison", "text": "Thuốc độc"},
+    {"id": "weapon_knife", "text": "Dao"},
+    {"id": "weapon_blunt", "text": "Vật nặng"}
+  ],
+  "solution": {
+    "killerId": "suspect_sound",
+    "motiveId": "motive_coverup",
+    "weaponId": "weapon_blunt",
+    "keyEvidenceId": "clue_audio_noise",
+    "explanation": "**Kết luận:** Kỹ sư âm thanh Bảo là hung thủ.\n\n**Diễn biến:**\n1. Bảo tạo đoạn ghi âm giả để đổ tội, rồi dùng vật nặng hạ sát nạn nhân.\n2. Nhiễu nền và độ vang phòng cho thấy file bị cắt ghép.\n3. Lịch sử chỉnh sửa và bản thảo lời thoại xác nhận việc dựng chứng cứ.\n\n**Bằng chứng quyết định:** Nhiễu nền không liên tục và lịch sử chỉnh sửa." 
+  }
+}

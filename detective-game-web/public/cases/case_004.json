@@ -1,0 +1,101 @@
+{
+  "caseId": "case_004",
+  "title": "Bệnh án bị tráo",
+  "difficulty": "hard",
+  "introText": "Nạn nhân biến mất khỏi phòng hồi sức dù camera không ghi lỗi. Hồ sơ y tế cho thấy nhóm máu mâu thuẫn.",
+  "intro": "Một bệnh nhân VIP biến mất khỏi phòng hồi sức. Camera ghi nhận đầy đủ các lối ra vào, không thấy ai khả nghi. Tuy nhiên, hồ sơ y tế và mẫu máu còn lại lại không khớp với thông tin nạn nhân.",
+  "clues": [
+    {
+      "id": "clue_blood_type",
+      "name": "Mẫu máu không khớp",
+      "description": "Mẫu máu tại giường là nhóm B, trong khi hồ sơ nạn nhân ghi nhóm A.",
+      "tags": ["y khoa", "mâu thuẫn"]
+    },
+    {
+      "id": "clue_bracelet_swap",
+      "name": "Vòng tay bệnh nhân bị đổi",
+      "description": "Vòng tay ghi mã bệnh án có dấu dán chồng lên chữ cũ.",
+      "tags": ["tài liệu"]
+    },
+    {
+      "id": "clue_medicine_cart",
+      "name": "Xe thuốc bị di chuyển",
+      "description": "Xe thuốc bị đẩy ra khỏi phòng trong 4 phút khi camera chuyển góc.",
+      "tags": ["log", "thời gian"]
+    },
+    {
+      "id": "clue_cleaner_footprint",
+      "name": "Dấu giày của nhân viên vệ sinh",
+      "description": "Dấu giày chuyên dụng dẫn đến kho vải bẩn.",
+      "tags": ["dấu vết"]
+    },
+    {
+      "id": "clue_airlock_log",
+      "name": "Log buồng cách ly",
+      "description": "Buồng cách ly mở trong 30 giây lúc 03:12, trùng với thời gian mất tích.",
+      "tags": ["log"]
+    }
+  ],
+  "suspects": [
+    {
+      "id": "suspect_nurse",
+      "name": "Điều dưỡng Mai",
+      "avatarPath": "Avatars/nurse",
+      "bio": "Phụ trách ca đêm, có quyền truy cập hồ sơ.",
+      "questions": [
+        {
+          "id": "q_nurse_1",
+          "text": "Cô có chỉnh sửa hồ sơ nhóm máu không?",
+          "answer": "Không, hồ sơ đó tôi nhận từ bác sĩ.",
+          "unlocks": {"questions": [], "clues": ["clue_blood_type"]}
+        }
+      ]
+    },
+    {
+      "id": "suspect_doctor",
+      "name": "Bác sĩ Trọng",
+      "avatarPath": "Avatars/doctor",
+      "bio": "Bác sĩ trưởng khoa, chịu trách nhiệm bệnh án.",
+      "questions": [
+        {
+          "id": "q_doctor_1",
+          "text": "Ai được phép ra vào buồng cách ly?",
+          "answer": "Chỉ nhân viên y tế và kỹ thuật viên có thẻ đặc biệt.",
+          "unlocks": {"questions": [], "clues": ["clue_airlock_log"]}
+        }
+      ]
+    },
+    {
+      "id": "suspect_cleaner",
+      "name": "Thanh (Vệ sinh)",
+      "avatarPath": "Avatars/cleaner",
+      "bio": "Nhân viên vệ sinh, được giao thu gom vải bẩn.",
+      "questions": [
+        {
+          "id": "q_cleaner_1",
+          "text": "Anh có đẩy xe thuốc ra khỏi phòng không?",
+          "answer": "Tôi chỉ đẩy xe vải bẩn, không đụng vào xe thuốc.",
+          "unlocks": {"questions": [], "clues": ["clue_cleaner_footprint"]}
+        }
+      ]
+    }
+  ],
+  "motives": [
+    {"id": "motive_kidnap", "text": "Bắt cóc tống tiền"},
+    {"id": "motive_coverup", "text": "Che giấu nhầm lẫn y khoa"},
+    {"id": "motive_blackmail", "text": "Bị tống tiền"},
+    {"id": "motive_revenge", "text": "Trả thù"}
+  ],
+  "weapons": [
+    {"id": "weapon_sedative", "text": "Thuốc an thần"},
+    {"id": "weapon_scalpel", "text": "Dao mổ"},
+    {"id": "weapon_choking", "text": "Siết cổ"}
+  ],
+  "solution": {
+    "killerId": "suspect_doctor",
+    "motiveId": "motive_coverup",
+    "weaponId": "weapon_sedative",
+    "keyEvidenceId": "clue_blood_type",
+    "explanation": "**Kết luận:** Bác sĩ Trọng dàn dựng vụ mất tích.\n\n**Diễn biến:**\n1. Ông tráo bệnh án và nhóm máu để che giấu sai sót phẫu thuật.\n2. Dùng thuốc an thần đưa bệnh nhân thật ra buồng cách ly rồi chuyển đi.\n3. Mẫu máu không khớp và log buồng cách ly phơi bày việc tráo người.\n\n**Bằng chứng quyết định:** Mẫu máu không khớp và vòng tay bệnh nhân bị đổi." 
+  }
+}
