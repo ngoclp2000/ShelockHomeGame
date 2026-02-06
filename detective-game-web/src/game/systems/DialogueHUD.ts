@@ -26,18 +26,20 @@ export class DialogueHUD {
     
     // Create main container fixed to camera
     this.container = scene.add.container(0, 0);
-    this.container.setScrollFactor(0);
     this.container.setDepth(2000); // Top layer
     this.container.setVisible(false);
+    this.container.setScrollFactor(0);
 
     // Dark overlay background
     this.overlay = scene.add.graphics();
     this.overlay.fillStyle(0x000000, 0.7);
     this.overlay.fillRect(0, 0, scene.scale.width, scene.scale.height); // Will need update on resize
+    this.overlay.setScrollFactor(0);
     this.container.add(this.overlay);
 
     // Panel container
     this.panel = scene.add.container(0, 0);
+    this.panel.setScrollFactor(0);
     this.container.add(this.panel);
 
     // Event listeners
@@ -97,6 +99,7 @@ export class DialogueHUD {
     bg.fillRoundedRect(-panelW / 2, -panelH / 2, panelW, panelH, 20 * this.SCALE);
     bg.lineStyle(4 * this.SCALE, 0xc9a227, 1);
     bg.strokeRoundedRect(-panelW / 2, -panelH / 2, panelW, panelH, 20 * this.SCALE);
+    bg.setScrollFactor(0);
     this.panel.add(bg);
 
     // 2. Header (Avatar + Name + Close)
@@ -105,6 +108,7 @@ export class DialogueHUD {
     // Avatar
     const avatar = this.scene.add.text(-panelW / 2 + 40 * this.SCALE, headerY, '👤', { fontSize: `${40 * this.SCALE}px` });
     avatar.setOrigin(0, 0.5);
+    avatar.setScrollFactor(0);
     this.panel.add(avatar);
 
     // Name
@@ -114,6 +118,7 @@ export class DialogueHUD {
       fontStyle: 'bold'
     });
     name.setOrigin(0, 0.5);
+    name.setScrollFactor(0);
     this.panel.add(name);
 
     // Close Button - use center alignment for proper click detection
@@ -129,6 +134,7 @@ export class DialogueHUD {
       panelW / 2 - 20 * this.SCALE, 
       headerY + 40 * this.SCALE
     ));
+    separator.setScrollFactor(0);
     this.panel.add(separator);
 
     // 3. Content Body
@@ -149,6 +155,7 @@ export class DialogueHUD {
       fontStyle: 'italic'
     });
     intro.setOrigin(0.5, 0);
+    intro.setScrollFactor(0);
     this.panel.add(intro);
 
     // Question Buttons
@@ -184,6 +191,7 @@ export class DialogueHUD {
     const panelH = this.HEIGHT * this.SCALE;
     const hitZone = this.scene.add.zone(0, 0, panelW, panelH);
     hitZone.setInteractive({ useHandCursor: true });
+    hitZone.setScrollFactor(0);
     hitZone.on('pointerdown', () => {
       this.currentAnswer = null;
       if (this.currentSuspect) {
@@ -198,6 +206,7 @@ export class DialogueHUD {
     const boxBg = this.scene.add.graphics();
     boxBg.fillStyle(0x2d2d44, 1);
     boxBg.fillRoundedRect(-boxWidth / 2, startY, boxWidth, 200 * this.SCALE, 10 * this.SCALE);
+    boxBg.setScrollFactor(0);
     this.panel.add(boxBg);
 
     // Answer Text
@@ -208,6 +217,7 @@ export class DialogueHUD {
       lineSpacing: 8
     });
     answerText.setOrigin(0.5, 0);
+    answerText.setScrollFactor(0);
     this.panel.add(answerText);
 
     // Continue Indicator (Visual only, since whole panel is clickable)
@@ -218,6 +228,7 @@ export class DialogueHUD {
       fontStyle: 'italic'
     });
     continueText.setOrigin(0.5);
+    continueText.setScrollFactor(0);
     
     // Pulse animation for the indicator
     this.scene.tweens.add({
@@ -259,6 +270,7 @@ export class DialogueHUD {
     const containerY = align === 'center' ? y : y + h / 2;
     
     const container = this.scene.add.container(containerX, containerY);
+    container.setScrollFactor(0);
 
     // Background Graphics
     const bg = this.scene.add.graphics();
@@ -271,12 +283,14 @@ export class DialogueHUD {
       new Phaser.Geom.Rectangle(-w / 2, -h / 2, w, h),
       Phaser.Geom.Rectangle.Contains
     );
+    hitGraphics.setScrollFactor(0);
 
     // Background
     if (options.bgColor !== undefined) {
       bg.fillStyle(bgColor, 1);
       bg.fillRoundedRect(-w / 2, -h / 2, w, h, 8 * this.SCALE);
     }
+    bg.setScrollFactor(0);
 
     // Text
     const textX = align === 'center' ? 0 : -w / 2 + 20 * this.SCALE;
@@ -285,6 +299,7 @@ export class DialogueHUD {
       color: textColor,
     });
     label.setOrigin(align === 'center' ? 0.5 : 0, 0.5);
+    label.setScrollFactor(0);
 
     container.add([hitGraphics, bg, label]);
     
